@@ -80,7 +80,7 @@
                 .user-avatar {
                     width: 40px;
                     height: 40px;
-                    border-radius: 10px;
+                    border-radius: 50%;
                 }
                 .el-icon-caret-bottom {
                     position: absolute;
