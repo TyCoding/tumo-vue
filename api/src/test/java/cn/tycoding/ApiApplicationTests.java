@@ -1,4 +1,4 @@
-package tumo.tycoding;
+package cn.tycoding;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

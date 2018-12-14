@@ -1,43 +1,35 @@
 package cn.tycoding.admin.dto;
 
-
-import cn.tycoding.admin.enums.ModifyEnums;
-
 /**
  * @auther TyCoding
  * @date 2018/10/16
  */
-public class ModifyResult {
+public class Result {
 
-    private boolean success;
-    private String info;
+    private Integer code; //返回码
+    private Object data; //返回数据
 
-    public ModifyResult() {
+    public Result() {
     }
 
-    public ModifyResult(boolean success, String info) {
-        this.success = success;
-        this.info = info;
+    public Result(Integer code, Object data) {
+        this.code = code;
+        this.data = data;
     }
 
-    public ModifyResult(boolean success, ModifyEnums modifyEnums) {
-        this.success = success;
-        this.info = modifyEnums.getInfo();
+    public Integer getCode() {
+        return code;
     }
 
-    public boolean isSuccess() {
-        return success;
+    public void setCode(Integer code) {
+        this.code = code;
     }
 
-    public void setSuccess(boolean success) {
-        this.success = success;
+    public Object getData() {
+        return data;
     }
 
-    public String getInfo() {
-        return info;
-    }
-
-    public void setInfo(String info) {
-        this.info = info;
+    public void setData(Object data) {
+        this.data = data;
     }
 }

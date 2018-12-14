@@ -1,8 +1,7 @@
-package tumo.tycoding.admin.service;
+package cn.tycoding.admin.service;
 
-
-import tumo.tycoding.admin.dto.PageBean;
-import tumo.tycoding.admin.entity.Comments;
+import cn.tycoding.admin.dto.PageBean;
+import cn.tycoding.admin.entity.Comments;
 
 /**
  * @auther TyCoding

@@ -1,4 +1,4 @@
-package tumo.tycoding.admin.entity;
+package cn.tycoding.admin.entity;
 
 import java.io.Serializable;
 

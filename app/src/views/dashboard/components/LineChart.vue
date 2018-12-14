@@ -46,14 +46,14 @@ export default {
   },
   mounted() {
     this.initChart()
-    if (this.autoResize) {
-      this.__resizeHandler = debounce(() => {
-        if (this.chart) {
-          this.chart.resize()
-        }
-      }, 100)
-      window.addEventListener('resize', this.__resizeHandler)
-    }
+    // if (this.autoResize) {
+    //   this.__resizeHandler = debounce(() => {
+    //     if (this.chart) {
+    //       this.chart.resize()
+    //     }
+    //   }, 100)
+    //   window.addEventListener('resize', this.__resizeHandler)
+    // }
 
     // 监听侧边栏的变化
     this.sidebarElm = document.getElementsByClassName('sidebar-container')[0]

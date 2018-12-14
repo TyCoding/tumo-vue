@@ -1,8 +1,8 @@
-package tumo.tycoding.admin.mapper;
+package cn.tycoding.admin.mapper;
 
+import cn.tycoding.admin.entity.ArticleCategory;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
-import tumo.tycoding.admin.entity.ArticleCategory;
 
 /**
  * @auther TyCoding

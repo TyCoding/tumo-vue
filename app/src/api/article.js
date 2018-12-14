@@ -18,7 +18,7 @@ export function findByPage(pageCode, pageSize) {
     return request({
         url: '/article/findByPage',
         method: 'post',
-        param: {
+        params: {
             pageCode,
             pageSize
         }

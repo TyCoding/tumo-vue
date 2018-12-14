@@ -1,15 +1,13 @@
-package tumo.tycoding.admin.controller;
+package cn.tycoding.admin.controller;
 
 
+import cn.tycoding.admin.dto.Result;
+import cn.tycoding.admin.dto.StatusCode;
+import cn.tycoding.admin.entity.Links;
+import cn.tycoding.admin.enums.ResultEnums;
+import cn.tycoding.admin.service.LinksService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import tumo.tycoding.admin.dto.ModifyResult;
-import tumo.tycoding.admin.dto.PageBean;
-import tumo.tycoding.admin.entity.Links;
-import tumo.tycoding.admin.enums.ModifyEnums;
-import tumo.tycoding.admin.service.LinksService;
-
-import java.util.List;
 
 /**
  * @auther TyCoding
@@ -23,9 +21,9 @@ public class LinksController {
     @Autowired
     private LinksService linksService;
 
-    @RequestMapping("/findAllCount")
-    public Long findAllCount() {
-        return linksService.findAllCount();
+    @RequestMapping(value = "/findAllCount", method = RequestMethod.GET)
+    public Result findAllCount() {
+        return new Result(StatusCode.SUCCESS, linksService.findAllCount());
     }
 
     /**
@@ -33,9 +31,9 @@ public class LinksController {
      *
      * @return
      */
-    @RequestMapping("/findAll")
-    public List<Links> findAll() {
-        return linksService.findAll();
+    @RequestMapping(value = "/findAll", method = RequestMethod.GET)
+    public Result findAll() {
+        return new Result(StatusCode.SUCCESS, linksService.findAllCount());
     }
 
     /**
@@ -46,48 +44,48 @@ public class LinksController {
      * @param pageSize 每页显示的记录数
      * @return
      */
-    @RequestMapping("/findByPage")
-    public PageBean findByPage(Links links,
+    @RequestMapping(value = "/findByPage", method = RequestMethod.POST)
+    public Result findByPage(Links links,
                                @RequestParam(value = "pageCode", required = false) Integer pageCode,
                                @RequestParam(value = "pageSize", required = false) Integer pageSize) {
-        return linksService.findByPage(links, pageCode, pageSize);
+        return new Result(StatusCode.SUCCESS, linksService.findByPage(links, pageCode, pageSize));
     }
 
-    @RequestMapping("/findById")
-    public Links findById(@RequestParam("id") Long id) {
-        return linksService.findById(id);
+    @RequestMapping(value = "/findById", method = RequestMethod.GET)
+    public Result findById(@RequestParam("id") Long id) {
+        return new Result(StatusCode.SUCCESS, linksService.findById(id));
     }
 
-    @RequestMapping("/save")
-    public ModifyResult save(@RequestBody Links links) {
+    @RequestMapping(value = "/save", method = RequestMethod.POST)
+    public Result save(@RequestBody Links links) {
         try {
             linksService.save(links);
-            return new ModifyResult(true, ModifyEnums.SUCCESS);
+            return new Result(StatusCode.SUCCESS, ResultEnums.SUCCESS);
         } catch (Exception e) {
             e.printStackTrace();
-            return new ModifyResult(false, e.getMessage());
+            return new Result(StatusCode.ERROR, ResultEnums.ERROR);
         }
     }
 
-    @RequestMapping("/update")
-    public ModifyResult update(@RequestBody Links links) {
+    @RequestMapping(value = "/update", method = RequestMethod.PUT)
+    public Result update(@RequestBody Links links) {
         try {
             linksService.update(links);
-            return new ModifyResult(true, ModifyEnums.SUCCESS);
+            return new Result(StatusCode.SUCCESS, ResultEnums.SUCCESS);
         } catch (Exception e) {
             e.printStackTrace();
-            return new ModifyResult(false, e.getMessage());
+            return new Result(StatusCode.ERROR, ResultEnums.ERROR);
         }
     }
 
-    @RequestMapping("/delete")
-    public ModifyResult delete(@RequestBody Long... ids) {
+    @RequestMapping(value = "/delete", method = RequestMethod.DELETE)
+    public Result delete(@RequestBody Long... ids) {
         try {
             linksService.delete(ids);
-            return new ModifyResult(true, ModifyEnums.SUCCESS);
+            return new Result(StatusCode.SUCCESS, ResultEnums.SUCCESS);
         } catch (Exception e) {
             e.printStackTrace();
-            return new ModifyResult(false, e.getMessage());
+            return new Result(StatusCode.ERROR, ResultEnums.ERROR);
         }
     }
 }

@@ -26,26 +26,27 @@ export const constantRouterMap = [
     {path: '/404', component: () => import('@/views/404'), hidden: true},
 
     {
-        path: '/',
+        path: '/redirect',
         component: Layout,
-        redirect: '/dashboard',
-        name: 'Dashboard',
         hidden: true,
-        children: [{
-            path: 'dashboard',
-            component: () => import('@/views/dashboard/index')
-        }]
+        children: [
+            {
+                path: '/redirect/:path*',
+                component: () => import('@/views/redirect/index')
+            }
+        ]
     },
 
     {
-        path: '/dashboard',
+        path: '',
         component: Layout,
+        redirect: 'dashboard',
         children: [
             {
-                path: '/dashboard',
-                name: 'Dashboard',
+                path: 'dashboard',
                 component: () => import('@/views/dashboard/index'),
-                meta: {title: 'Dashboard', icon: 'dashboard'}
+                name: 'Dashboard',
+                meta: { title: 'dashboard', icon: 'dashboard', noCache: true }
             }
         ]
     },
@@ -64,20 +65,20 @@ export const constantRouterMap = [
                 path: 'create',
                 component: () => import('@/views/editor/create'),
                 name: 'CreateArticle',
-                meta: {title: 'createArticle', icon: 'edit'}
+                meta: {title: '撰写文章', icon: 'edit'}
             },
             {
                 path: 'edit/:id(\\d+)',
                 component: () => import('@/views/editor/edit'),
                 name: 'EditArticle',
-                meta: {title: 'editArticle', noCache: true},
+                meta: {title: '修改文章', noCache: true},
                 hidden: true
             },
             {
                 path: 'list',
                 component: () => import('@/views/editor/list'),
                 name: 'ArticleList',
-                meta: {title: 'articleList', icon: 'list'}
+                meta: {title: '文章列表', icon: 'list'}
             }
         ]
     },
@@ -87,10 +88,10 @@ export const constantRouterMap = [
         component: Layout,
         children: [
             {
-                path: 'comments',
-                name: 'Comments',
+                path: 'index',
+                name: 'comments',
                 component: () => import('@/views/comments/index'),
-                meta: {title: 'Comments', icon: 'message'}
+                meta: {title: '评论管理', icon: 'message'}
             }
         ]
     },
@@ -100,10 +101,36 @@ export const constantRouterMap = [
         component: Layout,
         children: [
             {
-                path: 'cover',
-                name: 'Cover',
+                path: 'index',
+                name: 'cover',
                 component: () => import('@/views/cover/index'),
-                meta: {title: 'Cover', icon: 'img'}
+                meta: {title: '封面管理', icon: 'img'}
+            }
+        ]
+    },
+
+    {
+        path: '/links',
+        component: Layout,
+        children: [
+            {
+                path: 'index',
+                name: 'links',
+                component: () => import('@/views/links/index'),
+                meta: {title: '友链管理', icon: 'links'}
+            }
+        ]
+    },
+
+    {
+        path: '/upload',
+        component: Layout,
+        children: [
+            {
+                path: 'index',
+                name: 'upload',
+                component: () => import('@/views/upload/index'),
+                meta: {title: '文件管理', icon: 'upload'}
             }
         ]
     },

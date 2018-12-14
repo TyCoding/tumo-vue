@@ -1,4 +1,4 @@
-package tumo.tycoding.admin.entity;
+package cn.tycoding.admin.entity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import org.springframework.format.annotation.DateTimeFormat;

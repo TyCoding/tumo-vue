@@ -1,4 +1,5 @@
-package tumo.tycoding.admin.service;
+package cn.tycoding.admin.service;
+
 
 import cn.tycoding.admin.entity.User;
 

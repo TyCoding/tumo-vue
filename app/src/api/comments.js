@@ -6,3 +6,14 @@ export function findAll() {
         method: 'get',
     })
 }
+
+export function findByPage(pageCode, pageSize) {
+    return request({
+        url: '/comments/findByPage',
+        method: 'post',
+        params: {
+            pageCode,
+            pageSize
+        }
+    })
+}

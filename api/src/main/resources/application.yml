@@ -24,15 +24,6 @@ spring:
       #间隔多久进行一次检测，检测需要关闭的空闲连接
       time-between-eviction-runs-millis: 60000
 
-  #thymeleaf模板引擎
-  thymeleaf:
-    prefix: classpath:/templates/
-    check-template-location: true
-    suffix: .html
-    encoding: UTF-8
-    mode: LEGACYHTML5
-    cache: false
-
     #devtools插件
   devtools:
     livereload:
@@ -40,12 +31,6 @@ spring:
       port: 35729
     restart:
       enabled: true #是否支持热部署
-
-    #文件上传相关设置
-  servlet:
-    multipart:
-      max-file-size: 10Mb
-      max-request-size: 100Mb
 
 #  resources:
 #    #强调springboot的配置文件位置

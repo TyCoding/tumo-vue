@@ -1,8 +1,8 @@
-package tumo.tycoding.admin.service;
+package cn.tycoding.admin.service;
 
-import tumo.tycoding.admin.dto.ArticleArchives;
-import tumo.tycoding.admin.dto.PageBean;
-import tumo.tycoding.admin.entity.Article;
+import cn.tycoding.admin.dto.ArticleArchives;
+import cn.tycoding.admin.dto.PageBean;
+import cn.tycoding.admin.entity.Article;
 
 import java.util.List;
 

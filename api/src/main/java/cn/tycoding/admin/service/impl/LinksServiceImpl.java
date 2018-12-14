@@ -1,15 +1,15 @@
-package tumo.tycoding.admin.service.impl;
+package cn.tycoding.admin.service.impl;
 
 import cn.tycoding.admin.dto.PageBean;
 import cn.tycoding.admin.entity.Links;
-import cn.tycoding.admin.enums.ModifyEnums;
-import cn.tycoding.admin.exception.ModifyException;
+import cn.tycoding.admin.enums.ResultEnums;
+import cn.tycoding.admin.exception.ResultException;
 import cn.tycoding.admin.mapper.LinksMapper;
-import cn.tycoding.admin.service.LinksService;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import cn.tycoding.admin.service.LinksService;
 
 import java.util.List;
 
@@ -51,10 +51,10 @@ public class LinksServiceImpl implements LinksService {
         try {
             int saveCount = linksMapper.save(links);
             if (saveCount <= 0) {
-                throw new ModifyException(ModifyEnums.ERROR);
+                throw new ResultException(ResultEnums.ERROR);
             }
         } catch (Exception e) {
-            throw new ModifyException(ModifyEnums.INNER_ERROR);
+            throw new ResultException(ResultEnums.INNER_ERROR);
         }
     }
 
@@ -63,10 +63,10 @@ public class LinksServiceImpl implements LinksService {
         try {
             int updateCount = linksMapper.update(links);
             if (updateCount <= 0) {
-                throw new ModifyException(ModifyEnums.ERROR);
+                throw new ResultException(ResultEnums.ERROR);
             }
         } catch (Exception e) {
-            throw new ModifyException(ModifyEnums.INNER_ERROR);
+            throw new ResultException(ResultEnums.INNER_ERROR);
         }
     }
 
@@ -76,11 +76,11 @@ public class LinksServiceImpl implements LinksService {
             for (long id : ids){
                 int deleteCount = linksMapper.delete(id);
                 if (deleteCount <= 0) {
-                    throw new ModifyException(ModifyEnums.ERROR);
+                    throw new ResultException(ResultEnums.ERROR);
                 }
             }
         } catch (Exception e) {
-            throw new ModifyException(ModifyEnums.INNER_ERROR);
+            throw new ResultException(ResultEnums.INNER_ERROR);
         }
     }
 }

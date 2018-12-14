@@ -7,17 +7,17 @@ import cn.tycoding.admin.enums.ResultEnums;
  * @auther TyCoding
  * @date 2018/10/16
  */
-public class ModifyException extends RuntimeException {
+public class ResultException extends RuntimeException {
 
-    public ModifyException(String message) {
+    public ResultException(String message) {
         super(message);
     }
 
-    public ModifyException(String message, Throwable cause) {
+    public ResultException(String message, Throwable cause) {
         super(message, cause);
     }
 
-    public ModifyException(ResultEnums resultEnums) {
+    public ResultException(ResultEnums resultEnums) {
 
     }
 }

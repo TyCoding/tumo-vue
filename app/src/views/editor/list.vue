@@ -1,51 +1,25 @@
 <template>
-    <div class="app-container">
+    <div class="editor-container">
 
         <el-table v-loading="listLoading" :data="list" border fit highlight-current-row style="width: 100%">
-            <el-table-column align="center" label="ID" width="80">
+            <el-table-column ref="selection" align="center" type="selection" width="55"></el-table-column>
+            <el-table-column prop="id" align="center" sortable fixed show-overflow-tooltip label="编号" width="80"></el-table-column>
+            <el-table-column align="center" prop="title" label="文章标题" width="260" show-overflow-tooltip></el-table-column>
+            <el-table-column align="center" prop="author" sortable show-overflow-tooltip label="文章作者" width="120"></el-table-column>
+            <el-table-column align="center" prop="createTime" sortable label="创建时间" width="170"></el-table-column>
+            <el-table-column align="center" prop="editTime" sortable label="最后编辑时间" width="170"></el-table-column>
+            <el-table-column align="center" prop="publishTime" sortable label="发布时间" width="170"></el-table-column>
+            <el-table-column align="center" prop="category" show-overflow-tooltip label="文章分类" width="130"></el-table-column>
+            <el-table-column align="center" prop="state" sortable label="状态" width="120">
                 <template slot-scope="scope">
-                    <span>{{ scope.row.id }}</span>
+                    <el-tag>{{scope.row.state == '1' ? '已发布':'存入草稿'}}</el-tag>
                 </template>
             </el-table-column>
-
-            <el-table-column width="180px" align="center" label="Date">
+            <el-table-column label="操作" align="center" fixed="right">
                 <template slot-scope="scope">
-                    <span>{{ scope.row.timestamp | parseTime('{y}-{m}-{d} {h}:{i}') }}</span>
-                </template>
-            </el-table-column>
-
-            <el-table-column width="120px" align="center" label="Author">
-                <template slot-scope="scope">
-                    <span>{{ scope.row.author }}</span>
-                </template>
-            </el-table-column>
-
-            <el-table-column width="100px" label="Importance">
-                <template slot-scope="scope">
-                    <svg-icon v-for="n in +scope.row.importance" :key="n" icon-class="star" class="meta-item__icon"/>
-                </template>
-            </el-table-column>
-
-            <el-table-column class-name="status-col" label="Status" width="110">
-                <template slot-scope="scope">
-                    <el-tag :type="scope.row.status | statusFilter">{{ scope.row.status }}</el-tag>
-                </template>
-            </el-table-column>
-
-            <el-table-column min-width="300px" label="Title">
-                <template slot-scope="scope">
-
-                    <router-link :to="'/example/edit/'+scope.row.id" class="link-type">
-                        <span>{{ scope.row.title }}</span>
-                    </router-link>
-                </template>
-            </el-table-column>
-
-            <el-table-column align="center" label="Actions" width="120">
-                <template slot-scope="scope">
-                    <router-link :to="'/example/edit/'+scope.row.id">
-                        <el-button type="primary" size="small" icon="el-icon-edit">Edit</el-button>
-                    </router-link>
+                    <el-button icon="el-icon-delete" size="mini" type="danger">删除</el-button>
+                    <el-button size="mini" icon="el-icon-edit" type="warning">编辑</el-button>
+                    <el-button size="mini" icon="el-icon-view" type="primary">预览</el-button>
                 </template>
             </el-table-column>
         </el-table>
@@ -76,8 +50,8 @@
         data() {
             return {
                 list: null,
-                total: 0,
                 listLoading: true,
+                total: 0,
                 listQuery: {
                     pageCode: 1,
                     pageSize: 10
@@ -90,10 +64,12 @@
         methods: {
             getList() {
                 this.listLoading = true;
-                findByPage(this.listQuery).then(response => {
-                    this.list = response.data.rows;
-                    this.total = response.data.total;
-                    this.listLoading = false
+                findByPage(this.listQuery.pageCode, this.listQuery.pageSize).then(response => {
+                    if (response.code == 20000) {
+                        this.list = response.data.rows;
+                        this.total = response.data.total;
+                        this.listLoading = false
+                    }
                 })
             },
             handleSizeChange(val) {
@@ -108,7 +84,10 @@
     }
 </script>
 
-<style scoped>
+<style rel="stylesheet/scss" lang="scss" scoped>
+    .editor-container{
+        padding: 32px;
+    }
     .edit-input {
         padding-right: 100px;
     }

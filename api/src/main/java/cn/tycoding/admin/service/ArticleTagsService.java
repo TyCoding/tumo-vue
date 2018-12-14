@@ -1,8 +1,8 @@
-package tumo.tycoding.admin.service;
+package cn.tycoding.admin.service;
 
 
-import tumo.tycoding.admin.entity.ArticleTags;
-import tumo.tycoding.admin.entity.Tags;
+import cn.tycoding.admin.entity.ArticleTags;
+import cn.tycoding.admin.entity.Tags;
 
 import java.util.List;
 

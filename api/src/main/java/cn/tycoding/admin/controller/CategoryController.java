@@ -1,19 +1,15 @@
-package tumo.tycoding.admin.controller;
+package cn.tycoding.admin.controller;
 
 
+import cn.tycoding.admin.dto.Result;
+import cn.tycoding.admin.dto.StatusCode;
+import cn.tycoding.admin.entity.Article;
+import cn.tycoding.admin.entity.Category;
+import cn.tycoding.admin.enums.ResultEnums;
+import cn.tycoding.admin.service.ArticleService;
+import cn.tycoding.admin.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-import tumo.tycoding.admin.dto.ModifyResult;
-import tumo.tycoding.admin.dto.PageBean;
-import tumo.tycoding.admin.entity.Article;
-import tumo.tycoding.admin.entity.Category;
-import tumo.tycoding.admin.enums.ModifyEnums;
-import tumo.tycoding.admin.service.ArticleService;
-import tumo.tycoding.admin.service.CategoryService;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.List;
@@ -23,7 +19,7 @@ import java.util.Map;
  * @auther TyCoding
  * @date 2018/10/18
  */
-@Controller
+@RestController
 @SuppressWarnings("all")
 @RequestMapping("/category")
 public class CategoryController {
@@ -39,10 +35,9 @@ public class CategoryController {
      *
      * @return
      */
-    @ResponseBody
-    @RequestMapping("/findAll")
-    public List<Category> findAll() {
-        return categoryService.findAll();
+    @RequestMapping(value = "/findAll", method = RequestMethod.GET)
+    public Result findAll() {
+        return new Result(StatusCode.SUCCESS, categoryService.findAll());
     }
 
     /**
@@ -51,16 +46,15 @@ public class CategoryController {
      *
      * @return
      */
-    @ResponseBody
-    @RequestMapping("/findArticleCountForCategory")
-    public Map<String, Integer> findArticleCountForCategory() {
+    @RequestMapping(value = "/findArticleCountForCategory", method = RequestMethod.GET)
+    public Result findArticleCountForCategory() {
         Map<String, Integer> map = new HashMap<String, Integer>();
         List<Category> categoryList = categoryService.findAll();
         for (Category category : categoryList) {
             List<Article> articleList = articleService.findByCategory(category.getcName());
             map.put(category.getcName(), articleList.size());
         }
-        return map;
+        return new Result(StatusCode.SUCCESS, map);
     }
 
     /**
@@ -71,53 +65,48 @@ public class CategoryController {
      * @param pageSize 每页显示的记录数
      * @return
      */
-    @ResponseBody
-    @RequestMapping("/findByPage")
-    public PageBean findByPage(Category category,
+    @RequestMapping(value = "/findByPage", method = RequestMethod.POST)
+    public Result findByPage(Category category,
                                @RequestParam(value = "pageCode", required = false) Integer pageCode,
                                @RequestParam(value = "pageSize", required = false) Integer pageSize) {
-        return categoryService.findByPage(category, pageCode, pageSize);
+        return new Result(StatusCode.SUCCESS, categoryService.findByPage(category, pageCode, pageSize));
     }
 
-    @ResponseBody
-    @RequestMapping("/findById")
-    public Category findById(@RequestParam("id") Long id) {
-        return categoryService.findById(id);
+    @RequestMapping(value = "/findById", method = RequestMethod.GET)
+    public Result findById(@RequestParam("id") Long id) {
+        return new Result(StatusCode.SUCCESS, categoryService.findById(id));
     }
 
-    @ResponseBody
-    @RequestMapping("/save")
-    public ModifyResult save(@RequestBody Category category) {
+    @RequestMapping(value = "/save", method = RequestMethod.POST)
+    public Result save(@RequestBody Category category) {
         try {
             categoryService.save(category);
-            return new ModifyResult(true, ModifyEnums.SUCCESS);
+            return new Result(StatusCode.SUCCESS, ResultEnums.SUCCESS);
         } catch (Exception e) {
             e.printStackTrace();
-            return new ModifyResult(false, e.getMessage());
+            return new Result(StatusCode.ERROR, ResultEnums.ERROR);
         }
     }
 
-    @ResponseBody
-    @RequestMapping("/update")
-    public ModifyResult update(@RequestBody Category category) {
+    @RequestMapping(value = "/update", method = RequestMethod.PUT)
+    public Result update(@RequestBody Category category) {
         try {
             categoryService.update(category);
-            return new ModifyResult(true, ModifyEnums.SUCCESS);
+            return new Result(StatusCode.SUCCESS, ResultEnums.SUCCESS);
         } catch (Exception e) {
             e.printStackTrace();
-            return new ModifyResult(false, e.getMessage());
+            return new Result(StatusCode.ERROR, ResultEnums.ERROR);
         }
     }
 
-    @ResponseBody
-    @RequestMapping("/delete")
-    public ModifyResult delete(@RequestBody Long... ids) {
+    @RequestMapping(value = "/delete", method = RequestMethod.DELETE)
+    public Result delete(@RequestBody Long... ids) {
         try {
             categoryService.delete(ids);
-            return new ModifyResult(true, ModifyEnums.SUCCESS);
+            return new Result(StatusCode.SUCCESS, ResultEnums.SUCCESS);
         } catch (Exception e) {
             e.printStackTrace();
-            return new ModifyResult(false, e.getMessage());
+            return new Result(StatusCode.ERROR, ResultEnums.ERROR);
         }
     }
 }

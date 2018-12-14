@@ -1,13 +1,13 @@
-package tumo.tycoding.admin.service.impl;
+package cn.tycoding.admin.service.impl;
 
 import cn.tycoding.admin.dto.PageBean;
 import cn.tycoding.admin.entity.ArticleCategory;
-import cn.tycoding.admin.enums.ModifyEnums;
-import cn.tycoding.admin.exception.ModifyException;
+import cn.tycoding.admin.enums.ResultEnums;
+import cn.tycoding.admin.exception.ResultException;
 import cn.tycoding.admin.mapper.ArticleCategoryMapper;
-import cn.tycoding.admin.service.ArticleCategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import cn.tycoding.admin.service.ArticleCategoryService;
 
 import java.util.List;
 
@@ -48,12 +48,12 @@ public class ArticleCategoryServiceImpl implements ArticleCategoryService {
             if (!exists(articleCategory)){
                 int updateCount = articleCategoryMapper.save(articleCategory);
                 if (updateCount <= 0) {
-                    throw new ModifyException(ModifyEnums.ERROR);
+                    throw new ResultException(ResultEnums.ERROR);
                 }
             }
         } catch (Exception e) {
             e.printStackTrace();
-            throw new ModifyException(ModifyEnums.INNER_ERROR);
+            throw new ResultException(ResultEnums.INNER_ERROR);
         }
     }
 
@@ -76,11 +76,11 @@ public class ArticleCategoryServiceImpl implements ArticleCategoryService {
             for (long id : ids) {
                 int deleteCount = articleCategoryMapper.delete(id);
                 if (deleteCount <= 0) {
-                    throw new ModifyException(ModifyEnums.ERROR);
+                    throw new ResultException(ResultEnums.ERROR);
                 }
             }
         } catch (Exception e) {
-            throw new ModifyException(ModifyEnums.INNER_ERROR);
+            throw new ResultException(ResultEnums.INNER_ERROR);
         }
     }
 }

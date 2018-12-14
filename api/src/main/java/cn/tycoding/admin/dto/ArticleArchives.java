@@ -1,7 +1,7 @@
-package tumo.tycoding.admin.dto;
+package cn.tycoding.admin.dto;
 
 
-import tumo.tycoding.admin.entity.Article;
+import cn.tycoding.admin.entity.Article;
 
 import java.io.Serializable;
 import java.util.List;

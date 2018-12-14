@@ -1,6 +1,6 @@
-package tumo.tycoding.admin.dto;
+package cn.tycoding.admin.dto;
 
-import tumo.tycoding.admin.entity.Comments;
+import cn.tycoding.admin.entity.Comments;
 
 import java.io.Serializable;
 import java.util.List;

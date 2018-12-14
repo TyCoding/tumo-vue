@@ -217,6 +217,7 @@ CREATE TABLE `tb_user` (
   `password` varchar(100) NOT NULL COMMENT '密码',
   `salt` varchar(200) NOT NULL COMMENT '盐值',
   `email` varchar(100) DEFAULT NULL COMMENT '邮箱',
+  `avatar` varchar(100) DEFAULT NULL COMMENT '头像',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='标签表';
 
@@ -224,7 +225,7 @@ CREATE TABLE `tb_user` (
 -- Records of tb_user
 -- ----------------------------
 BEGIN;
-INSERT INTO `tb_user` VALUES (1, 'tycoding', '菜鸡一枚', 'b9fd429a10b73d2c0971db1d4ad975a9', '9a924d8ae9800c229c892eeba7d413a6', '233333@qq.com');
+INSERT INTO `tb_user` VALUES (1, 'tycoding', '菜鸡一枚', 'b9fd429a10b73d2c0971db1d4ad975a9', '9a924d8ae9800c229c892eeba7d413a6', '233333@qq.com', 'http://img.api.tycoding.cn/avatar.jpg');
 COMMIT;
 
 SET FOREIGN_KEY_CHECKS = 1;

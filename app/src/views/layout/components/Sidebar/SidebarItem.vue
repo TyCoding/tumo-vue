@@ -1,6 +1,5 @@
 <template>
     <div v-if="!item.hidden&&item.children" class="menu-wrapper">
-
         <template
             v-if="hasOneShowingChild(item.children,item) && (!onlyOneChild.children||onlyOneChild.noShowingChildren)&&!item.alwaysShow">
             <app-link :to="resolvePath(onlyOneChild.path)">
@@ -37,13 +36,16 @@
 
 <script>
     import path from 'path'
+    import { generateTitle } from '@/utils/i18n'
     import {isExternal} from '@/utils'
     import Item from './Item'
     import AppLink from './Link'
+    import FixiOSBug from './FixiOSBug'
 
     export default {
         name: 'SidebarItem',
         components: {Item, AppLink},
+        mixins: [FixiOSBug],
         props: {
             // route object
             item: {
@@ -97,7 +99,8 @@
             },
             isExternalLink(routePath) {
                 return isExternal(routePath)
-            }
+            },
+            generateTitle
         }
     }
 </script>

@@ -1,15 +1,13 @@
-package tumo.tycoding.admin.controller;
+package cn.tycoding.admin.controller;
 
 
+import cn.tycoding.admin.dto.Result;
+import cn.tycoding.admin.dto.StatusCode;
+import cn.tycoding.admin.entity.Tags;
+import cn.tycoding.admin.enums.ResultEnums;
+import cn.tycoding.admin.service.TagsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import tumo.tycoding.admin.dto.ModifyResult;
-import tumo.tycoding.admin.dto.PageBean;
-import tumo.tycoding.admin.entity.Tags;
-import tumo.tycoding.admin.enums.ModifyEnums;
-import tumo.tycoding.admin.service.TagsService;
-
-import java.util.List;
 
 /**
  * @auther TyCoding
@@ -23,7 +21,7 @@ public class TagsController {
     @Autowired
     private TagsService tagsService;
 
-    @RequestMapping("/findAllCount")
+    @RequestMapping(value = "/findAllCount", method = RequestMethod.GET)
     public Long findAllCount(){
         return tagsService.findAllCount();
     }
@@ -33,9 +31,9 @@ public class TagsController {
      *
      * @return
      */
-    @RequestMapping("/findAll")
-    public List<Tags> findAll() {
-        return tagsService.findAll();
+    @RequestMapping(value = "/findAll", method = RequestMethod.GET)
+    public Result findAll() {
+        return new Result(StatusCode.SUCCESS, tagsService.findAll());
     }
 
     /**
@@ -46,48 +44,48 @@ public class TagsController {
      * @param pageSize 每页显示的记录数
      * @return
      */
-    @RequestMapping("/findByPage")
-    public PageBean findByPage(Tags tags,
+    @RequestMapping(value = "/findByPage", method = RequestMethod.POST)
+    public Result findByPage(Tags tags,
                                @RequestParam(value = "pageCode", required = false) Integer pageCode,
                                @RequestParam(value = "pageSize", required = false) Integer pageSize) {
-        return tagsService.findByPage(tags, pageCode, pageSize);
+        return new Result(StatusCode.SUCCESS, tagsService.findByPage(tags, pageCode, pageSize));
     }
 
-    @RequestMapping("/findById")
-    public Tags findById(@RequestParam("id") Long id) {
-        return tagsService.findById(id);
+    @RequestMapping(value = "/findById", method = RequestMethod.GET)
+    public Result findById(@RequestParam("id") Long id) {
+        return new Result(StatusCode.SUCCESS, tagsService.findById(id));
     }
 
-    @RequestMapping("/save")
-    public ModifyResult save(@RequestBody Tags tags) {
+    @RequestMapping(value = "/save", method = RequestMethod.POST)
+    public Result save(@RequestBody Tags tags) {
         try {
             tagsService.save(tags);
-            return new ModifyResult(true, ModifyEnums.SUCCESS);
+            return new Result(StatusCode.SUCCESS, ResultEnums.SUCCESS);
         } catch (Exception e) {
             e.printStackTrace();
-            return new ModifyResult(false, e.getMessage());
+            return new Result(StatusCode.ERROR, ResultEnums.ERROR);
         }
     }
 
-    @RequestMapping("/update")
-    public ModifyResult update(@RequestBody Tags tags) {
+    @RequestMapping(value = "/update", method = RequestMethod.PUT)
+    public Result update(@RequestBody Tags tags) {
         try {
             tagsService.update(tags);
-            return new ModifyResult(true, ModifyEnums.SUCCESS);
+            return new Result(StatusCode.SUCCESS, ResultEnums.SUCCESS);
         } catch (Exception e) {
             e.printStackTrace();
-            return new ModifyResult(false, e.getMessage());
+            return new Result(StatusCode.ERROR, ResultEnums.ERROR);
         }
     }
 
-    @RequestMapping("/delete")
-    public ModifyResult delete(@RequestBody Long... ids) {
+    @RequestMapping(value = "/delete", method = RequestMethod.DELETE)
+    public Result delete(@RequestBody Long... ids) {
         try {
             tagsService.delete(ids);
-            return new ModifyResult(true, ModifyEnums.SUCCESS);
+            return new Result(StatusCode.SUCCESS, ResultEnums.SUCCESS);
         } catch (Exception e) {
             e.printStackTrace();
-            return new ModifyResult(false, e.getMessage());
+            return new Result(StatusCode.ERROR, ResultEnums.ERROR);
         }
     }
 }

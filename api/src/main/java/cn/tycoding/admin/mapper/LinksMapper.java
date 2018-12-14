@@ -1,8 +1,8 @@
-package tumo.tycoding.admin.mapper;
+package cn.tycoding.admin.mapper;
 
 import com.github.pagehelper.Page;
 import org.apache.ibatis.annotations.Mapper;
-import tumo.tycoding.admin.entity.Links;
+import cn.tycoding.admin.entity.Links;
 
 import java.util.List;
 

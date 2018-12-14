@@ -1,6 +1,6 @@
-package tumo.tycoding.admin.service;
+package cn.tycoding.admin.service;
 
-import tumo.tycoding.admin.entity.ArticleCategory;
+import cn.tycoding.admin.entity.ArticleCategory;
 
 /**
  * @auther TyCoding
