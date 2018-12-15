@@ -1,7 +1,16 @@
 export default {
     route: {
-        article: '文章管理',
         dashboard: 'Dashboard',
+        article: 'Article',
+        createArticle: 'Create Article',
+        editArticle: 'Edit Article',
+        articleList: 'Article List',
+        comments: 'Comments',
+        cover: 'Covers',
+        links: 'Links',
+        file: 'Files',
+
+
         introduction: 'Introduction',
         documentation: 'Documentation',
         guide: 'Guide',
@@ -9,7 +18,6 @@ export default {
         pagePermission: 'Page Permission',
         directivePermission: 'Directive Permission',
         icons: 'Icons',
-        components: 'Components',
         componentIndex: 'Introduction',
         tinymce: 'Tinymce',
         markdown: 'Markdown',
@@ -47,9 +55,6 @@ export default {
         customTreeTable: 'Custom TreeTable',
         tab: 'Tab',
         form: 'Form',
-        createArticle: 'Create Article',
-        editArticle: 'Edit Article',
-        articleList: 'Article List',
         errorPages: 'Error Pages',
         page401: '401',
         page404: '404',

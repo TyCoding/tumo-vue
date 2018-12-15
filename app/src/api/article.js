@@ -7,10 +7,10 @@ export function findAll() {
     })
 }
 
-export function findById() {
+export function findById(id) {
     return request({
-        url: '/article/findById',
-        method: 'post'
+        url: '/article/findById?id=' + id,
+        method: 'get'
     })
 }
 

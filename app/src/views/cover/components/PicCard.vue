@@ -47,8 +47,16 @@
     * {
         [class*=el-col-] {
             float: none;
-            display: inline-block;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
         }
+    }
+    .panel-group{
+        box-sizing: border-box;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
     }
     .card-panel-col{
         margin: 20px 0;

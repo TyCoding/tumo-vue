@@ -14,8 +14,6 @@
             <div class="createPost-main-container">
                 <el-row>
 
-                    <!--<Warning/>-->
-
                     <el-col :span="24">
                         <el-form-item style="margin-bottom: 40px;" prop="title">
                             <MDinput v-model="postForm.title" :maxlength="100" name="name" required>
@@ -37,7 +35,7 @@
 
                                 <el-col :span="10">
                                     <el-form-item label-width="80px" label="发布时间:" class="postInfo-container-item">
-                                        <el-date-picker v-model="postForm.display_time" type="datetime"
+                                        <el-date-picker v-model="postForm.publishTime" type="datetime"
                                                         format="yyyy-MM-dd HH:mm:ss" placeholder="选择日期时间"/>
                                     </el-form-item>
                                 </el-col>
@@ -65,13 +63,12 @@
                 </el-form-item>
 
                 <div class="editor-container">
-                    <!--<Tinymce ref="editor" :height="400" v-model="postForm.content"/>-->
                     <!-- Markdown富文本组件 -->
-                    <markdown ref="editor" v-model="postForm.content"></markdown>
+                    <markdown :content="postForm.content_md"></markdown>
                 </div>
 
                 <div style="margin-bottom: 20px;">
-                    <Upload v-model="postForm.image_uri"/>
+                    <Upload v-model="postForm.title_pic"/>
                 </div>
             </div>
         </el-form>
@@ -85,7 +82,7 @@
     import MDinput from '@/components/MDinput'
     import Sticky from '@/components/Sticky' // 粘性header组件
     import {validateURL} from '@/utils/validate'
-    import {findAll} from '@/api/article'
+    import {findById} from '@/api/article'
     import {userSearch} from '@/api/remoteSearch'
     import Warning from './Warning'
     import {CommentDropdown, PlatformDropdown, SourceUrlDropdown} from './Dropdown'
@@ -93,11 +90,11 @@
     const defaultForm = {
         status: 'draft',
         title: '', // 文章题目
-        content: '', // 文章内容
+        content_md: '', // 文章内容
         content_short: '', // 文章摘要
-        source_uri: '', // 文章外链
-        image_uri: '', // 文章图片
-        display_time: undefined, // 前台展示时间
+        origin: '', // 文章外链
+        title_pic: '', // 文章图片
+        publish_time: undefined, // 前台展示时间
         id: undefined,
         platforms: ['a-platform'],
         comment_disabled: false,
@@ -145,10 +142,10 @@
                 loading: false,
                 userListOptions: [],
                 rules: {
-                    image_uri: [{validator: validateRequire}],
+                    title_pic: [{validator: validateRequire}],
                     title: [{validator: validateRequire}],
                     content: [{validator: validateRequire}],
-                    source_uri: [{validator: validateSourceUri, trigger: 'blur'}]
+                    origin: [{validator: validateSourceUri, trigger: 'blur'}]
                 },
                 tempRoute: {}
             }
@@ -176,7 +173,7 @@
         },
         methods: {
             fetchData(id) {
-                findAll(id).then(response => {
+                findById(id).then(response => {
                     this.postForm = response.data
                     // Just for test
                     this.postForm.title += `   Article Id:${this.postForm.id}`
@@ -194,7 +191,7 @@
                 this.$store.dispatch('updateVisitedView', route)
             },
             submitForm() {
-                this.postForm.display_time = parseInt(this.display_time / 1000)
+                this.postForm.publish_time = parseInt(this.publish_time / 1000)
                 console.log(this.postForm)
                 this.$refs.postForm.validate(valid => {
                     if (valid) {

@@ -1,7 +1,16 @@
 export default {
     route: {
-        article: '文章管理',
         dashboard: '首页',
+        article: '文章管理',
+        createArticle: '创建文章',
+        editArticle: '编辑文章',
+        articleList: '文章列表',
+        comments: '评论管理',
+        cover: '封面管理',
+        links: '友链管理',
+        file: '文件管理',
+
+
         introduction: '简述',
         documentation: '文档',
         guide: '引导页',
@@ -47,9 +56,7 @@ export default {
         customTreeTable: '自定义树表',
         tab: 'Tab',
         form: '表单',
-        createArticle: '创建文章',
-        editArticle: '编辑文章',
-        articleList: '文章列表',
+
         errorPages: '错误页面',
         page401: '401',
         page404: '404',

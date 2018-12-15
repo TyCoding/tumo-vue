@@ -57,28 +57,28 @@ export const constantRouterMap = [
         redirect: '/article/list',
         name: 'Article',
         meta: {
-            title: 'Article',
-            icon: 'list'
+            title: 'article',
+            icon: 'menu'
         },
         children: [
             {
                 path: 'create',
-                component: () => import('@/views/editor/create'),
+                component: () => import('@/views/article/create'),
                 name: 'CreateArticle',
-                meta: {title: '撰写文章', icon: 'edit'}
+                meta: {title: 'createArticle', icon: 'edit'}
             },
             {
                 path: 'edit/:id(\\d+)',
-                component: () => import('@/views/editor/edit'),
+                component: () => import('@/views/article/edit'),
                 name: 'EditArticle',
-                meta: {title: '修改文章', noCache: true},
+                meta: {title: 'editArticle', noCache: true},
                 hidden: true
             },
             {
                 path: 'list',
-                component: () => import('@/views/editor/list'),
+                component: () => import('@/views/article/list'),
                 name: 'ArticleList',
-                meta: {title: '文章列表', icon: 'list'}
+                meta: {title: 'articleList', icon: 'list'}
             }
         ]
     },
@@ -91,7 +91,7 @@ export const constantRouterMap = [
                 path: 'index',
                 name: 'comments',
                 component: () => import('@/views/comments/index'),
-                meta: {title: '评论管理', icon: 'message'}
+                meta: {title: 'comments', icon: 'message'}
             }
         ]
     },
@@ -104,7 +104,7 @@ export const constantRouterMap = [
                 path: 'index',
                 name: 'cover',
                 component: () => import('@/views/cover/index'),
-                meta: {title: '封面管理', icon: 'img'}
+                meta: {title: 'cover', icon: 'img'}
             }
         ]
     },
@@ -117,20 +117,20 @@ export const constantRouterMap = [
                 path: 'index',
                 name: 'links',
                 component: () => import('@/views/links/index'),
-                meta: {title: '友链管理', icon: 'links'}
+                meta: {title: 'links', icon: 'links'}
             }
         ]
     },
 
     {
-        path: '/upload',
+        path: '/file',
         component: Layout,
         children: [
             {
                 path: 'index',
-                name: 'upload',
-                component: () => import('@/views/upload/index'),
-                meta: {title: '文件管理', icon: 'upload'}
+                name: 'file',
+                component: () => import('@/views/file/index'),
+                meta: {title: 'file', icon: 'upload'}
             }
         ]
     },

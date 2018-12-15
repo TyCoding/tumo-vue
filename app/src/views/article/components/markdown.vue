@@ -3,26 +3,18 @@
         <div class="editor-container">
             <markdown-editor ref="markdownEditor" v-model="content" :language="language" height="600px"/>
         </div>
-        <!--<el-button style="margin-top:80px;" type="primary" icon="el-icon-document" @click="getHtml">Get HTML</el-button>-->
-        <!--<div v-html="html"></div>-->
     </div>
 </template>
 
 <script>
-    import MarkdownEditor from '@/components/Markdown'
+    import MarkdownEditor from '@/components/MarkdownEditor'
 
-    const content = `
-**This is test**
-* vue
-* element
-* webpack
-`
     export default {
         name: 'markdown',
         components: {MarkdownEditor},
         data() {
             return {
-                content: content,
+                content: this.$emit('content'),
                 html: '',
                 languageTypeList: {
                     'en': 'en_US',

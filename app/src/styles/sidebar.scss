@@ -22,14 +22,14 @@
     .horizontal-collapse-transition {
       transition: 0s width ease-in-out, 0s padding-left ease-in-out, 0s padding-right ease-in-out;
     }
-    .el-scrollbar__bar.is-vertical{
-      right: 0px;
-    }
     .scrollbar-wrapper {
       overflow-x: hidden!important;
       .el-scrollbar__view {
         height: 100%;
       }
+    }
+    .el-scrollbar__bar.is-vertical{
+      right: 0px;
     }
     .is-horizontal {
       display: none;
@@ -48,7 +48,7 @@
       width: 100% !important;
     }
     .is-active > .el-submenu__title{
-      color: #f4f4f5!important;
+        color: #f4f4f5!important;
     }
   }
   .hideSidebar {
