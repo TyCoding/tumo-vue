@@ -19,9 +19,9 @@ import '@/permission' // permission control
 
 Vue.use(Element, {
     i18n: (key, value) => i18n.t(key, value)
-})
+});
 
-Vue.config.productionTip = false
+Vue.config.productionTip = false;
 
 new Vue({
     el: '#app',
@@ -29,4 +29,4 @@ new Vue({
     store,
     i18n,
     render: h => h(App)
-})
+});

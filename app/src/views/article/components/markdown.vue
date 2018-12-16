@@ -1,20 +1,24 @@
 <template>
     <div class="components-container">
+
         <div class="editor-container">
-            <markdown-editor ref="markdownEditor" v-model="content" :language="language" height="600px"/>
+            <markdown-editor v-model="content" height="600px"></markdown-editor>
         </div>
+
     </div>
 </template>
 
 <script>
     import MarkdownEditor from '@/components/MarkdownEditor'
+    import {Editor} from '@toast-ui/vue-editor'
 
     export default {
-        name: 'markdown',
-        components: {MarkdownEditor},
+        name: 'MarkdownDemo',
+        components: { MarkdownEditor, Editor},
+        props: ['content'],
         data() {
             return {
-                content: this.$emit('content'),
+                // content: '',
                 html: '',
                 languageTypeList: {
                     'en': 'en_US',
@@ -30,7 +34,7 @@
         },
         methods: {
             getHtml() {
-                this.html = this.$refs.markdownEditor.getHtml();
+                this.html = this.$refs.markdownEditor.getHtml()
                 console.log(this.html)
             }
         }
@@ -38,11 +42,10 @@
 </script>
 
 <style scoped>
-    .editor-container {
+    .editor-container{
         margin-bottom: 30px;
     }
-
-    .tag-title {
+    .tag-title{
         margin-bottom: 5px;
     }
 </style>

@@ -64,7 +64,7 @@
 
                 <div class="editor-container">
                     <!-- Markdown富文本组件 -->
-                    <markdown :content="postForm.content_md"></markdown>
+                    <markdown :content="postForm.contentMd"></markdown>
                 </div>
 
                 <div style="margin-bottom: 20px;">
@@ -90,11 +90,11 @@
     const defaultForm = {
         status: 'draft',
         title: '', // 文章题目
-        content_md: '', // 文章内容
+        contentMd: '', // 文章内容
         content_short: '', // 文章摘要
         origin: '', // 文章外链
-        title_pic: '', // 文章图片
-        publish_time: undefined, // 前台展示时间
+        titlePic: '', // 文章图片
+        publishTime: undefined, // 前台展示时间
         id: undefined,
         platforms: ['a-platform'],
         comment_disabled: false,
@@ -142,7 +142,7 @@
                 loading: false,
                 userListOptions: [],
                 rules: {
-                    title_pic: [{validator: validateRequire}],
+                    titlePic: [{validator: validateRequire}],
                     title: [{validator: validateRequire}],
                     content: [{validator: validateRequire}],
                     origin: [{validator: validateSourceUri, trigger: 'blur'}]
@@ -191,7 +191,7 @@
                 this.$store.dispatch('updateVisitedView', route)
             },
             submitForm() {
-                this.postForm.publish_time = parseInt(this.publish_time / 1000)
+                this.postForm.publishTime = parseInt(this.publishTime / 1000)
                 console.log(this.postForm)
                 this.$refs.postForm.validate(valid => {
                     if (valid) {

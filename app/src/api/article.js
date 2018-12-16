@@ -24,3 +24,11 @@ export function findByPage(pageCode, pageSize) {
         }
     })
 }
+
+export function deleteById(ids) {
+    return request({
+        url: '/article/delete',
+        method: 'post',
+        data: ids
+    })
+}

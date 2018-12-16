@@ -115,7 +115,7 @@ public class ArticleController {
         }
     }
 
-    @RequestMapping(value = "/delete", method = RequestMethod.DELETE)
+    @RequestMapping(value = "/delete", method = RequestMethod.POST)
     public Result delete(@RequestBody Long... ids) {
         try {
             articleService.delete(ids);

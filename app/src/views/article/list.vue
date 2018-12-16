@@ -32,7 +32,7 @@
 </template>
 
 <script>
-    import {findAll,findByPage} from '@/api/article'
+    import {findAll,findByPage,deleteById} from '@/api/article'
     import Pagination from '@/components/Pagination' // Secondary package based on el-pagination
 
     export default {
@@ -56,7 +56,7 @@
                 listQuery: {
                     pageCode: 1,
                     pageSize: 10
-                }
+                },
             }
         },
         created() {
@@ -88,7 +88,20 @@
                     type: 'warning',
                     center: true
                 }).then(() => {
-                    alert("去删除，ID：" + id);
+                    var ids = [];
+                    ids.push(id);
+                    deleteById(ids).then(response => {
+                        var flag = 'success';
+                        if (response.code != 20000) {
+                            flag = 'error'
+                        }
+                        this.$message({
+                            type: flag,
+                            message: response.data,
+                            duration: 6000
+                        });
+                    });
+                    this.getList();
                 }).catch(() => {
                     this.$message({
                         type: 'info',
