@@ -29,14 +29,6 @@ public class UserController {
     @Autowired
     private PasswordHelper passwordHelper;
 
-    /**
-     * 分页查询
-     *
-     * @param comments 查询条件
-     * @param pageCode 当前页
-     * @param pageSize 每页显示的记录数
-     * @return
-     */
     @RequestMapping(value = "/findByPage", method = RequestMethod.POST)
     public Result findByPage(User user,
                                @RequestParam(value = "pageCode", required = false) Integer pageCode,
@@ -95,7 +87,7 @@ public class UserController {
         }
     }
 
-    @RequestMapping(value = "/delete", method = RequestMethod.DELETE)
+    @RequestMapping(value = "/delete", method = RequestMethod.POST)
     public Result delete(@RequestBody Long... ids) {
         try {
             userService.delete(ids);

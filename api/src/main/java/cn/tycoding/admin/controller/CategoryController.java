@@ -30,11 +30,6 @@ public class CategoryController {
     @Autowired
     private ArticleService articleService;
 
-    /**
-     * 查询所有
-     *
-     * @return
-     */
     @RequestMapping(value = "/findAll", method = RequestMethod.GET)
     public Result findAll() {
         return new Result(StatusCode.SUCCESS, categoryService.findAll());
@@ -57,14 +52,6 @@ public class CategoryController {
         return new Result(StatusCode.SUCCESS, map);
     }
 
-    /**
-     * 分页查询
-     *
-     * @param comments 查询条件
-     * @param pageCode 当前页
-     * @param pageSize 每页显示的记录数
-     * @return
-     */
     @RequestMapping(value = "/findByPage", method = RequestMethod.POST)
     public Result findByPage(Category category,
                                @RequestParam(value = "pageCode", required = false) Integer pageCode,
@@ -99,7 +86,7 @@ public class CategoryController {
         }
     }
 
-    @RequestMapping(value = "/delete", method = RequestMethod.DELETE)
+    @RequestMapping(value = "/delete", method = RequestMethod.POST)
     public Result delete(@RequestBody Long... ids) {
         try {
             categoryService.delete(ids);

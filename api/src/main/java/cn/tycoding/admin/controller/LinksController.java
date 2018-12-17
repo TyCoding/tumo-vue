@@ -26,24 +26,11 @@ public class LinksController {
         return new Result(StatusCode.SUCCESS, linksService.findAllCount());
     }
 
-    /**
-     * 查询所有
-     *
-     * @return
-     */
     @RequestMapping(value = "/findAll", method = RequestMethod.GET)
     public Result findAll() {
         return new Result(StatusCode.SUCCESS, linksService.findAllCount());
     }
 
-    /**
-     * 分页查询
-     *
-     * @param comments 查询条件
-     * @param pageCode 当前页
-     * @param pageSize 每页显示的记录数
-     * @return
-     */
     @RequestMapping(value = "/findByPage", method = RequestMethod.POST)
     public Result findByPage(Links links,
                                @RequestParam(value = "pageCode", required = false) Integer pageCode,
@@ -78,7 +65,7 @@ public class LinksController {
         }
     }
 
-    @RequestMapping(value = "/delete", method = RequestMethod.DELETE)
+    @RequestMapping(value = "/delete", method = RequestMethod.POST)
     public Result delete(@RequestBody Long... ids) {
         try {
             linksService.delete(ids);

@@ -22,28 +22,15 @@ public class TagsController {
     private TagsService tagsService;
 
     @RequestMapping(value = "/findAllCount", method = RequestMethod.GET)
-    public Long findAllCount(){
-        return tagsService.findAllCount();
+    public Result findAllCount(){
+        return new Result(StatusCode.SUCCESS, tagsService.findAllCount());
     }
 
-    /**
-     * 查询所有
-     *
-     * @return
-     */
     @RequestMapping(value = "/findAll", method = RequestMethod.GET)
     public Result findAll() {
         return new Result(StatusCode.SUCCESS, tagsService.findAll());
     }
 
-    /**
-     * 分页查询
-     *
-     * @param comments  查询条件
-     * @param pageCode 当前页
-     * @param pageSize 每页显示的记录数
-     * @return
-     */
     @RequestMapping(value = "/findByPage", method = RequestMethod.POST)
     public Result findByPage(Tags tags,
                                @RequestParam(value = "pageCode", required = false) Integer pageCode,

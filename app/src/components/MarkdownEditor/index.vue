@@ -7,14 +7,12 @@
     import 'codemirror/lib/codemirror.css' // codemirror
     import 'tui-editor/dist/tui-editor.css' // editor ui
     import 'tui-editor/dist/tui-editor-contents.css' // editor content
-    import 'codemirror/lib/codemirror.css';
 
     import Editor from 'tui-editor'
     import defaultOptions from './defaultOptions'
 
     export default {
-        name: 'MarkdownEditor',
-        components: {Editor},
+        name: 'MarddownEditor',
         props: {
             value: {
                 type: String,

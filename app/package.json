@@ -14,7 +14,6 @@
         "svgo": "svgo -f src/icons/svg --config=src/icons/svgo.yml"
     },
     "dependencies": {
-        "@toast-ui/vue-editor": "^1.0.2",
         "axios": "0.18.0",
         "codemirror": "5.39.2",
         "echarts": "^4.2.0-rc.2",

@@ -1,30 +1,43 @@
 <template>
-    <div class="components-container">
-
-        <div class="editor-container">
-            <markdown-editor v-model="content" height="600px"></markdown-editor>
-        </div>
-
+    <div class="editor-container">
+        <markdown-editor v-model="md" height="600px"></markdown-editor>
     </div>
 </template>
 
 <script>
     import MarkdownEditor from '@/components/MarkdownEditor'
-    import {Editor} from '@toast-ui/vue-editor'
 
     export default {
-        name: 'MarkdownDemo',
-        components: { MarkdownEditor, Editor},
-        props: ['content'],
+        name: 'markdown',
+        components: {MarkdownEditor},
+        props: {
+            content: {
+                type: String,
+                default: ''
+            }
+        },
         data() {
             return {
+                markdownId: this.id,
                 // content: '',
+                md: '',
                 html: '',
                 languageTypeList: {
                     'en': 'en_US',
                     'zh': 'zh_CN',
                     'es': 'es_ES'
                 }
+            }
+        },
+        created() {
+        },
+        watch: {
+            content(newVal, oldVal) {
+                this.md = newVal; //监听父组件传来的content数据，只会执行一次，用来给子组件赋初始值
+            },
+            md(newVal, oldVal) {
+                //监听子组件中数据
+                this.$emit('updateContent', newVal);
             }
         },
         computed: {
@@ -34,7 +47,7 @@
         },
         methods: {
             getHtml() {
-                this.html = this.$refs.markdownEditor.getHtml()
+                this.html = this.$refs.markdownEditor.getHtml();
                 console.log(this.html)
             }
         }
@@ -42,10 +55,11 @@
 </script>
 
 <style scoped>
-    .editor-container{
+    .editor-container {
         margin-bottom: 30px;
     }
-    .tag-title{
+
+    .tag-title {
         margin-bottom: 5px;
     }
 </style>

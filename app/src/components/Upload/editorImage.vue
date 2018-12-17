@@ -5,6 +5,7 @@
         </el-button>
         <el-dialog :visible.sync="dialogVisible">
             <el-upload
+                drag
                 :multiple="true"
                 :file-list="fileList"
                 :show-file-list="true"
@@ -14,7 +15,8 @@
                 class="editor-slide-upload"
                 action="https://httpbin.org/post"
                 list-type="picture-card">
-                <el-button size="small" type="primary">点击上传</el-button>
+                <i class="el-icon-upload"></i>
+                <div class="el-upload__text">将文件拖到此处，或<em>点击上传</em></div>
             </el-upload>
             <el-button @click="dialogVisible = false">取 消</el-button>
             <el-button type="primary" @click="handleSubmit">确 定</el-button>
@@ -26,7 +28,7 @@
     // import { getToken } from 'api/qiniu'
 
     export default {
-        name: 'EditorSlideUpload',
+        name: 'editorImage',
         props: {
             color: {
                 type: String,
@@ -50,13 +52,13 @@
                     this.$message('请等待所有图片上传成功 或 出现了网络问题，请刷新页面重新上传！')
                     return
                 }
-                this.$emit('successCBK', arr)
-                this.listObj = {}
-                this.fileList = []
+                this.$emit('successCBK', arr);
+                this.listObj = {};
+                this.fileList = [];
                 this.dialogVisible = false
             },
             handleSuccess(response, file) {
-                const uid = file.uid
+                const uid = file.uid;
                 const objKeyArr = Object.keys(this.listObj)
                 for (let i = 0, len = objKeyArr.length; i < len; i++) {
                     if (this.listObj[objKeyArr[i]].uid === uid) {
@@ -98,7 +100,19 @@
         }
     }
 </script>
-
+<style rel="stylesheet/scss" lang="scss">
+    .el-upload--picture-card{
+        line-height: 27px;
+    }
+    .el-upload-dragger{
+        border: none;
+        height: 146px !important;
+    }
+    .el-upload-dragger .el-icon-upload{
+        line-height: 0;
+        margin: 52px 0 16px;
+    }
+</style>
 <style rel="stylesheet/scss" lang="scss" scoped>
     .editor-slide-upload {
         margin-bottom: 20px;

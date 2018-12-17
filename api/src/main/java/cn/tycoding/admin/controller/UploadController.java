@@ -68,7 +68,11 @@ public class UploadController {
             picture.transferTo(targetFile);
             System.out.println("上传成功");
             //将文件在服务器的存储路径返回
-            return new Result(StatusCode.SUCCESS, "/upload/" + fileName);
+            Map map = new HashMap<>();
+            map.put("name", fileName);
+            map.put("url", "/upload/" + fileName);
+            
+            return new Result(StatusCode.SUCCESS, map);
         } catch (IOException e) {
             System.out.println("上传失败");
             e.printStackTrace();

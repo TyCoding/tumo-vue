@@ -6,8 +6,7 @@
                 <CommentDropdown v-model="postForm.comment_disabled"/>
                 <PlatformDropdown v-model="postForm.platforms"/>
                 <SourceUrlDropdown v-model="postForm.source_uri"/>
-                <el-button v-loading="loading" style="margin-left: 10px;" type="success" @click="submitForm">发布
-                </el-button>
+                <el-button v-loading="loading" style="margin-left: 10px;" type="success" @click="submitForm">发布</el-button>
                 <el-button v-loading="loading" type="warning" @click="draftForm">草稿</el-button>
             </sticky>
 
@@ -23,7 +22,7 @@
 
                         <div class="postInfo-container">
                             <el-row>
-                                <el-col :span="8">
+                                <el-col :span="8" :xs="{span: 24}" :sm="{span: 24}" :md="{span: 8}" :lg="{span: 8}" :xl="{span: 8}">
                                     <el-form-item label-width="45px" label="作者:" class="postInfo-container-item">
                                         <el-select v-model="postForm.author" :remote-method="getRemoteUserList"
                                                    filterable remote placeholder="搜索用户">
@@ -33,14 +32,14 @@
                                     </el-form-item>
                                 </el-col>
 
-                                <el-col :span="10">
-                                    <el-form-item label-width="80px" label="发布时间:" class="postInfo-container-item">
+                                <el-col :span="10" :xs="{span: 24}" :sm="{span: 24}" :md="{span: 8}" :lg="{span: 8}" :xl="{span: 8}">
+                                    <el-form-item label-width="72px" label="发布时间:" class="postInfo-container-item">
                                         <el-date-picker v-model="postForm.publishTime" type="datetime"
                                                         format="yyyy-MM-dd HH:mm:ss" placeholder="选择日期时间"/>
                                     </el-form-item>
                                 </el-col>
 
-                                <el-col :span="6">
+                                <el-col :span="6" :xs="{span: 24}" :sm="{span: 24}" :md="{span: 8}" :lg="{span: 8}" :xl="{span: 8}">
                                     <el-form-item label-width="60px" label="重要性:" class="postInfo-container-item">
                                         <el-rate
                                             v-model="postForm.importance"
@@ -62,14 +61,17 @@
                     <span v-show="contentShortLength" class="word-counter">{{ contentShortLength }}字</span>
                 </el-form-item>
 
-                <div class="editor-container">
+                <div class="tinymce-container editor-container">
                     <!-- Markdown富文本组件 -->
-                    <markdown :content="postForm.contentMd"></markdown>
+                    <markdown :content="postForm.contentMd" @updateContent="updateContent"></markdown>
+                    <div class="editor-custom-btn-container">
+                        <editorImage color="#1890ff" class="editor-upload-btn" @successCBK="imageSuccessCBK"/>
+                    </div>
                 </div>
 
-                <div style="margin-bottom: 20px;">
+                <!--<div style="margin-bottom: 20px;">
                     <Upload v-model="postForm.title_pic"/>
-                </div>
+                </div>-->
             </div>
         </el-form>
 
@@ -77,6 +79,7 @@
 </template>
 
 <script>
+    import editorImage from '@/components/Upload/editorImage'
     import markdown from './markdown'
     import Upload from '@/components/Upload/singleImage3'
     import MDinput from '@/components/MDinput'
@@ -99,11 +102,11 @@
         platforms: ['a-platform'],
         comment_disabled: false,
         importance: 0
-    }
+    };
 
     export default {
         name: 'ArticleDetail',
-        components: {markdown, MDinput, Upload, Sticky, Warning, CommentDropdown, PlatformDropdown, SourceUrlDropdown},
+        components: {markdown, editorImage, MDinput, Upload, Sticky, Warning, CommentDropdown, PlatformDropdown, SourceUrlDropdown},
         props: {
             isEdit: {
                 type: Boolean,
@@ -116,12 +119,12 @@
                     this.$message({
                         message: rule.field + '为必传项',
                         type: 'error'
-                    })
+                    });
                     callback(new Error(rule.field + '为必传项'))
                 } else {
                     callback()
                 }
-            }
+            };
             const validateSourceUri = (rule, value, callback) => {
                 if (value) {
                     if (validateURL(value)) {
@@ -130,13 +133,13 @@
                         this.$message({
                             message: '外链url填写不正确',
                             type: 'error'
-                        })
+                        });
                         callback(new Error('外链url填写不正确'))
                     }
                 } else {
                     callback()
                 }
-            }
+            };
             return {
                 postForm: Object.assign({}, defaultForm),
                 loading: false,
@@ -159,8 +162,8 @@
             }
         },
         created() {
-            if (this.isEdit) {
-                const id = this.$route.params && this.$route.params.id
+            if (this.isEdit) { //说明是编辑文章的，获取路由传递的id
+                const id = this.$route.params && this.$route.params.id;
                 this.fetchData(id)
             } else {
                 this.postForm = Object.assign({}, defaultForm)
@@ -171,13 +174,19 @@
             // https://github.com/PanJiaChen/vue-element-admin/issues/1221
             this.tempRoute = Object.assign({}, this.$route)
         },
+        watch: {
+            contentMd(newVal, oldVal) {
+                console.log(newVal);
+                console.log(oldVal);
+            }
+        },
         methods: {
             fetchData(id) {
                 findById(id).then(response => {
-                    this.postForm = response.data
+                    this.postForm = response.data;
                     // Just for test
-                    this.postForm.title += `   Article Id:${this.postForm.id}`
-                    this.postForm.content_short += `   Article Id:${this.postForm.id}`
+                    this.postForm.title += `   Article Id:${this.postForm.id}`;
+                    this.postForm.content_short += `   Article Id:${this.postForm.id}`;
 
                     // Set tagsview title
                     this.setTagsViewTitle()
@@ -186,26 +195,26 @@
                 })
             },
             setTagsViewTitle() {
-                const title = this.lang === 'zh' ? '编辑文章' : 'Edit Article'
-                const route = Object.assign({}, this.tempRoute, {title: `${title}-${this.postForm.id}`})
+                const title = this.lang === 'zh' ? '编辑文章' : 'Edit Article';
+                const route = Object.assign({}, this.tempRoute, {title: `${title}-${this.postForm.id}`});
                 this.$store.dispatch('updateVisitedView', route)
             },
             submitForm() {
-                this.postForm.publishTime = parseInt(this.publishTime / 1000)
-                console.log(this.postForm)
+                this.postForm.publishTime = parseInt(this.publishTime / 1000);
+                console.log(this.postForm);
                 this.$refs.postForm.validate(valid => {
                     if (valid) {
-                        this.loading = true
+                        this.loading = true;
                         this.$notify({
                             title: '成功',
                             message: '发布文章成功',
                             type: 'success',
                             duration: 2000
-                        })
-                        this.postForm.status = 'published'
+                        });
+                        this.postForm.status = 'published';
                         this.loading = false
                     } else {
-                        console.log('error submit!!')
+                        console.log('error submit!!');
                         return false
                     }
                 })
@@ -215,7 +224,7 @@
                     this.$message({
                         message: '请填写必要的标题和内容',
                         type: 'warning'
-                    })
+                    });
                     return
                 }
                 this.$message({
@@ -223,14 +232,22 @@
                     type: 'success',
                     showClose: true,
                     duration: 1000
-                })
+                });
                 this.postForm.status = 'draft'
             },
             getRemoteUserList(query) {
                 userSearch(query).then(response => {
-                    if (!response.data.items) return
-                    this.userListOptions = response.data.items.map(v => v.name)
+                    if (!response.data.items) return;
+                    this.userListOptions = response.data.items.map(v => v.name);
                 })
+            },
+            imageSuccessCBK(arr) {
+                const _this = this;
+                arr.forEach(v => {
+                })
+            },
+            updateContent(val){
+                console.log("父组件得到的值：" + val);
             }
         }
     }
@@ -269,5 +286,36 @@
             right: -10px;
             top: 0px;
         }
+    }
+    .tinymce-container {
+        position: relative;
+    }
+
+    .tinymce-container >>> .mce-fullscreen {
+        z-index: 10000;
+    }
+
+    .tinymce-textarea {
+        visibility: hidden;
+        z-index: -1;
+    }
+
+    .editor-custom-btn-container {
+        position: absolute;
+        right: 4px;
+        top: 4px;
+        /*z-index: 2005;*/
+    }
+
+    .fullscreen .editor-custom-btn-container {
+        z-index: 10000;
+        position: fixed;
+    }
+
+    .editor-upload-btn {
+        display: inline-block;
+    }
+    .el-button--mini, .el-button--mini.is-round {
+        padding: 6px 15px;
     }
 </style>
