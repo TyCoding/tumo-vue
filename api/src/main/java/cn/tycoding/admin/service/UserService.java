@@ -1,6 +1,5 @@
 package cn.tycoding.admin.service;
 
-
 import cn.tycoding.admin.entity.User;
 
 /**

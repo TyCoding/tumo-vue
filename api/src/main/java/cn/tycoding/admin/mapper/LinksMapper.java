@@ -1,8 +1,8 @@
 package cn.tycoding.admin.mapper;
 
+import cn.tycoding.admin.entity.Links;
 import com.github.pagehelper.Page;
 import org.apache.ibatis.annotations.Mapper;
-import cn.tycoding.admin.entity.Links;
 
 import java.util.List;
 
@@ -19,11 +19,11 @@ public interface LinksMapper {
 
     Links findById(long id);
 
-    int save(Links links);
+    void save(Links links);
 
-    int update(Links links);
+    void update(Links links);
 
-    int delete(long id);
+    void delete(long id);
 
     Long findAllCount();
 }

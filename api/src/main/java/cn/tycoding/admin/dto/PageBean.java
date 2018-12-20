@@ -1,6 +1,5 @@
 package cn.tycoding.admin.dto;
 
-
 import java.io.Serializable;
 import java.util.List;
 
@@ -13,7 +12,7 @@ public class PageBean implements Serializable {
     //当前页
     private long total;
     //当前页记录
-    private Object rows;
+    private List rows;
 
     public PageBean(long total, List rows) {
         this.total = total;
@@ -28,11 +27,11 @@ public class PageBean implements Serializable {
         this.total = total;
     }
 
-    public Object getRows() {
+    public List getRows() {
         return rows;
     }
 
-    public void setRows(Object rows) {
+    public void setRows(List rows) {
         this.rows = rows;
     }
 }

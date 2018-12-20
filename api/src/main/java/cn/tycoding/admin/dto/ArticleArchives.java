@@ -1,6 +1,5 @@
 package cn.tycoding.admin.dto;
 
-
 import cn.tycoding.admin.entity.Article;
 
 import java.io.Serializable;

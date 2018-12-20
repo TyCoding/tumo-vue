@@ -1,9 +1,8 @@
 package cn.tycoding.admin.mapper;
 
-
+import cn.tycoding.admin.entity.Article;
 import com.github.pagehelper.Page;
 import org.apache.ibatis.annotations.Mapper;
-import cn.tycoding.admin.entity.Article;
 
 import java.util.List;
 
@@ -22,11 +21,11 @@ public interface ArticleMapper {
 
     Article findById(long id);
 
-    int save(Article article);
+    void save(Article article);
 
-    int update(Article article);
+    void update(Article article);
 
-    int delete(long id);
+    void delete(long id);
 
     long getLastId();
 

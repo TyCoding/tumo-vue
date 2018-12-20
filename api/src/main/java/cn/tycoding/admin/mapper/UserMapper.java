@@ -1,8 +1,8 @@
 package cn.tycoding.admin.mapper;
 
+import cn.tycoding.admin.entity.User;
 import com.github.pagehelper.Page;
 import org.apache.ibatis.annotations.Mapper;
-import cn.tycoding.admin.entity.User;
 
 /**
  * @auther TyCoding
@@ -15,11 +15,11 @@ public interface UserMapper {
 
     User findById(long id);
 
-    int save(User user);
+    void save(User user);
 
-    int update(User user);
+    void update(User user);
 
-    int delete(long id);
+    void delete(long id);
 
     User findByName(String username);
 }

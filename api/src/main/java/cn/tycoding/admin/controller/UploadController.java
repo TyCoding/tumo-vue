@@ -1,11 +1,9 @@
 package cn.tycoding.admin.controller;
 
-
 import cn.tycoding.admin.dto.Result;
 import cn.tycoding.admin.dto.StatusCode;
 import org.springframework.util.ResourceUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
@@ -16,6 +14,8 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @auther TyCoding
@@ -28,12 +28,12 @@ public class UploadController {
     /**
      * 文件上传
      *
-     * @param picture
+     * @param file
      * @param request
      * @return
      */
-    @RequestMapping(value = "/upload", method = RequestMethod.GET)
-    public Result upload(@RequestParam("picture") MultipartFile picture, HttpServletRequest request) throws FileNotFoundException {
+    @RequestMapping("/upload")
+    public Result upload(@RequestParam("file") MultipartFile file, HttpServletRequest request) throws FileNotFoundException {
         //获取文件在服务器的储存位置
         File path = new File(ResourceUtils.getURL("classpath:").getPath());
         File filePath = new File(path.getAbsolutePath(),"static/upload/");
@@ -44,7 +44,7 @@ public class UploadController {
         }
 
         //获取原始文件名称(包含格式)
-        String originalFileName = picture.getOriginalFilename();
+        String originalFileName = file.getOriginalFilename();
         System.out.println("原始文件名称：" + originalFileName);
 
         //获取文件类型，以最后一个`.`为标识
@@ -65,13 +65,14 @@ public class UploadController {
 
         //将文件保存到服务器指定位置
         try {
-            picture.transferTo(targetFile);
+            file.transferTo(targetFile);
             System.out.println("上传成功");
             //将文件在服务器的存储路径返回
+
             Map map = new HashMap<>();
             map.put("name", fileName);
             map.put("url", "/upload/" + fileName);
-            
+
             return new Result(StatusCode.SUCCESS, map);
         } catch (IOException e) {
             System.out.println("上传失败");

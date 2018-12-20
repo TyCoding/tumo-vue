@@ -14,7 +14,6 @@ public class User implements Serializable {
     private String password; //密码
     private String salt; //盐
     private String email; //邮箱
-    private String avatar; //头像
 
     private String checkPass; //用于旧密码校验的属性
 
@@ -74,25 +73,14 @@ public class User implements Serializable {
         this.email = email;
     }
 
-    public String getAvatar() {
-        return avatar;
-    }
-
-    public void setAvatar(String avatar) {
-        this.avatar = avatar;
-    }
-
     @Override
     public String toString() {
         return "User{" +
                 "id=" + id +
                 ", username='" + username + '\'' +
-                ", nickname='" + nickname + '\'' +
                 ", password='" + password + '\'' +
                 ", salt='" + salt + '\'' +
                 ", email='" + email + '\'' +
-                ", avatar='" + avatar + '\'' +
-                ", checkPass='" + checkPass + '\'' +
                 '}';
     }
 }

@@ -1,10 +1,9 @@
 package cn.tycoding.admin.mapper;
 
-
 import cn.tycoding.admin.entity.ArticleTags;
+import cn.tycoding.admin.entity.Tags;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
-import cn.tycoding.admin.entity.Tags;
 
 import java.util.List;
 
@@ -15,11 +14,13 @@ import java.util.List;
 @Mapper
 public interface ArticleTagsMapper {
 
-    int save(ArticleTags articleTags);
+    void save(ArticleTags articleTags);
 
     boolean exists(@Param("articleId") long articleId, @Param("tagsId") long tagsId);
 
-    int delete(long id);
-
     List<Tags> findByArticleId(long articleId);
+
+    void deleteByArticleId(long id);
+
+    void deleteByTagsId(long id);
 }

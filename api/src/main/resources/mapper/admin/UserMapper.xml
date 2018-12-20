@@ -26,16 +26,14 @@
           nickname,
           password,
           salt,
-          email,
-          avatar
+          email
         )
         VALUES(
           #{username},
           #{nickname},
           #{password},
           #{salt},
-          #{email},
-          #{avatar}
+          #{email}
         )
     </insert>
 
@@ -56,10 +54,7 @@
                 salt = #{salt},
             </if>
             <if test="email != null and email != ''">
-                email = #{email},
-            </if>
-            <if test="avatar != null and avatar != ''">
-                avatar = #{avatar}
+                email = #{email}
             </if>
         </set>
         WHERE id = #{id}
