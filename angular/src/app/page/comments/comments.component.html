@@ -1,0 +1,56 @@
+<div>
+    <nz-card style="border:1px solid #e8e8e8;" [nzBordered]="false" [nzTitle]="titleTemplate">
+        <nz-table #basicTable [nzData]="dataSet" #rowSelectionTable nzBordered nzSize="middle" nzShowSizeChanger [nzHideOnSinglePage]="true" [(nzPageIndex)]="pageIndex" [(nzPageSize)]="pageSize" [nzFrontPagination]="false" [nzTotal]="total" (nzPageIndexChange)="searchData()"
+            (nzPageSizeChange)="searchData(true)" (nzCurrentPageDataChange)="currentPageDataChange($event)">
+            <thead>
+                <tr>
+                    <th nzShowCheckbox [(nzChecked)]="allChecked" [nzIndeterminate]="indeterminate" (nzCheckedChange)="checkAll($event)"></th>
+                    <th nzWidth="40px">id</th>
+                    <th>留言内容</th>
+                    <th>文章标题</th>
+                    <th nzWidth="70px">留言人</th>
+                    <th nzWidth="80px">给谁留言</th>
+                    <th>留言时间</th>
+                    <th>留言人邮箱</th>
+                    <th>留言URL</th>
+                    <th>状态</th>
+                    <th nzWidth="110px">操作</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let data of basicTable.data; let i = index">
+                    <td nzShowCheckbox [(nzChecked)]="data.checked" (nzCheckedChange)="refreshStatus()"></td>
+                    <td>{{data.id}}</td>
+                    <td>{{data.content}}</td>
+                    <td>{{data.articleTitle}}</td>
+                    <td>{{data.author}}</td>
+                    <td>{{data.authorId}}</td>
+                    <td>{{data.time}}</td>
+                    <td>{{data.email}}</td>
+                    <td>{{data.url}}</td>
+                    <td>
+                        <nz-tag *ngIf="data.state==='正常'" [nzColor]="'green'">{{data.state}}</nz-tag>
+                    </td>
+                    <td>
+                        <button nzTitle="编辑" nzPlacement="top" nz-button nz-tooltip nzType="primary" nzSize="small" nzGhost style="margin-right:10px" (click)="handleEdit(i)">
+                            <i class="anticon anticon-edit"></i>
+                        </button>
+                        <nz-popconfirm [nzTitle]="'确认删除?'" (nzOnConfirm)="deleteRow(data)">
+                            <button nzTitle="删除" nzPlacement="top" nz-button nz-tooltip nz-popconfirm nzType="danger" nzSize="small" nzGhost>
+                                <i class="anticon anticon-delete"></i>
+                            </button>
+                        </nz-popconfirm>
+                    </td>
+                </tr>
+            </tbody>
+        </nz-table>
+    </nz-card>
+</div>
+
+<ng-template #titleTemplate>
+    <nz-input-group nzSuffixIcon="anticon anticon-search" style="width: 240px;">
+        <input type="text" nz-input placeholder="评论内容" [(ngModel)]="searchKey">
+    </nz-input-group>
+    <button style="margin-left:10px" nz-button nzType="primary" [nzSize]="size" (click)="refresh()">刷新<i nz-icon type="redo" theme="outline"></i></button>
+    <button *ngIf="allCheckeds.length" style="margin-left:10px" nz-button nzType="danger" [nzSize]="size" (click)="deleteAll()">批量删除<i nz-icon type="delete" theme="outline"></i></button>
+</ng-template>

@@ -1,0 +1,98 @@
+<nz-layout style="    height: 100%;">
+    <nz-sider id="sider" nzCollapsible [(nzCollapsed)]="isCollapsed" [nzTrigger]="triggerTemplate" style="    height: 100%;">
+        <div class="logo">
+        </div>
+        <ul nz-menu [nzTheme]="'dark'" [nzMode]="'inline'" [nzInlineCollapsed]="isCollapsed">
+            <li nz-menu-item [routerLink]="'/index/admin'">
+                <span>
+                    <i nz-icon type="windows" theme="outline"></i>
+                    <span class="nav-text">首页</span>
+                </span>
+            </li>
+            <li nz-menu-item [routerLink]="'/index/publish'">
+                <span>
+                    <i nz-icon type="edit" theme="outline"></i>
+                    <span class="nav-text">发布文章</span>
+                </span>
+            </li>
+            <li nz-menu-item [routerLink]="'/index/article'">
+                <span>
+                    <i nz-icon type="bars" theme="outline"></i>
+                    <span class="nav-text">文章管理</span>
+                </span>
+            </li>
+            <li nz-menu-item [routerLink]="'/index/comments'">
+                <span>
+                    <i nz-icon type="message" theme="outline"></i>
+                    <span class="nav-text">评论管理</span>
+                </span>
+            </li>
+            <li nz-menu-item [routerLink]="'/index/category'">
+                <span>
+                    <i nz-icon type="tags" theme="outline"></i>
+                    <span class="nav-text">分类标签</span>
+                </span>
+            </li>
+            <li nz-menu-item [routerLink]="'/index/cover'">
+                <span>
+                    <i nz-icon type="tag" theme="outline"></i>
+                    <span class="nav-text">封面标签</span>
+                </span>
+            </li>
+            <li nz-menu-item [routerLink]="'/index/links'">
+                <span>
+                    <i nz-icon type="link" theme="outline"></i>
+                    <span class="nav-text">友链管理</span>
+                </span>
+            </li>
+            <li nz-menu-item [routerLink]="'/index/user'">
+                <span>
+                    <i nz-icon type="user" theme="outline"></i>
+                    <span class="nav-text">个人信息</span>
+                </span>
+            </li>
+            <li nz-menu-item [routerLink]="'/index/setting'">
+                <span>
+                    <i nz-icon type="setting" theme="outline"></i>
+                    <span class="nav-text">系统设置</span>
+                </span>
+            </li>
+            <!-- <li nz-submenu>
+                <span title><i nz-icon type="user"></i><span class="nav-text">User</span></span>
+                <ul>
+                    <li nz-menu-item>Tom</li>
+                    <li nz-menu-item>Bill</li>
+                    <li nz-menu-item>Alex</li>
+                </ul>
+            </li>
+            <li nz-submenu>
+                <span title><i nz-icon type="team"></i><span class="nav-text">Team</span></span>
+                <ul>
+                    <li nz-menu-item>Team 1</li>
+                    <li nz-menu-item>Team 2</li>
+                </ul>
+            </li>
+            <li nz-menu-item><span><i nz-icon type="file"></i><span class="nav-text">File</span></span>
+            </li> -->
+        </ul>
+    </nz-sider>
+    <nz-layout>
+        <nz-header style="background: #fff; padding:0;">
+            <i class="trigger" nz-icon [type]="isCollapsed?'menu-unfold':'menu-fold'" (click)="isCollapsed=!isCollapsed"></i>
+        </nz-header>
+        <nz-content style="    margin: 24px 16px;padding: 24px; background: rgb(255, 255, 255); min-height: 280px;overflow-y: auto;">
+            <!-- <nz-breadcrumb style="margin:16px 0;">
+                <nz-breadcrumb-item>User</nz-breadcrumb-item>
+                <nz-breadcrumb-item>Bill</nz-breadcrumb-item>
+            </nz-breadcrumb> -->
+            <!-- <div style="padding:24px; background: #fff; min-height: 360px;">
+                Bill is a cat.
+            </div> -->
+            <router-outlet></router-outlet>
+        </nz-content>
+        <!-- <nz-footer style="text-align: center;"> ©2017 By YuTao</nz-footer> -->
+    </nz-layout>
+</nz-layout>
+<ng-template #trigger>
+    <i nz-icon type="up"></i>
+</ng-template>

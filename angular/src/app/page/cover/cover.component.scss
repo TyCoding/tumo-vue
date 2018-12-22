@@ -1,0 +1,51 @@
+.mCar {
+    width: 100%;
+    margin-bottom: 16px;
+    border: 1px solid #ebeef5;
+    background-color: #fff;
+    color: #303133;
+    -webkit-transition: .3s;
+    transition: .3s;
+    -webkit-box-shadow: 0 2px 12px 0 rgba(0, 0, 0, .1);
+    box-shadow: 0 2px 12px 0 rgba(0, 0, 0, .1);
+    .imgs {
+        width: 100%;
+        height: 283px;
+        padding: 18px 20px;
+        border-bottom: 1px solid #ebeef5;
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+        img {
+            display: block;
+            width: 100%;
+            height: 100%;
+        }
+    }
+    .texts {
+        padding: 14px;
+        .t {
+            display: block;
+            height: 100%;
+            height: 48px;
+            line-height: 24px;
+            overflow: hidden;
+            -o-text-overflow: ellipsis;
+            text-overflow: ellipsis;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            color: #303133;
+            font-size: 13px;
+        }
+        .fot {
+            margin-top: 13px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            span {
+                font-size: 13px;
+                color: #999;
+            }
+        }
+    }
+}

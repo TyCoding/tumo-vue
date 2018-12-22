@@ -1,4 +1,8 @@
-# Tumo Blog 前后端分离版本
+# Tumo Blog 
+
+**Vue**: 基于 [ElementUI-admin-template](https://github.com/PanJiaChen/vue-admin-template) 开发
+
+**Angular** 由 [TuTao](https://github.com/yutao331763646) 开发
 
 
 
