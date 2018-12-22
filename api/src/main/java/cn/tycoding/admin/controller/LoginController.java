@@ -28,12 +28,24 @@ public class LoginController {
     @Autowired
     private UserService userService;
 
-    @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public Result login(@RequestBody User user) {
-        if (user.getUsername() != null && user.getPassword() != null) {
+    @RequestMapping("/admin/login")
+    public Result login(
+            @RequestParam(value = "username", required = false) String username,
+            @RequestParam(value = "password", required = false) String password,
+            @RequestParam(value = "remember", required = false) String remember) {
+        if (username != null && password != null) {
             Subject subject = SecurityUtils.getSubject();
-            UsernamePasswordToken token = new UsernamePasswordToken(user.getUsername(), user.getPassword());
-
+            UsernamePasswordToken token = new UsernamePasswordToken(username, password);
+            if (remember != null) {
+                if (remember.equals("true")) {
+                    //说明选择了记住我
+                    token.setRememberMe(true);
+                } else {
+                    token.setRememberMe(false);
+                }
+            } else {
+                token.setRememberMe(false);
+            }
             try {
                 subject.login(token);
                 System.out.println("是否登录：" + subject.isAuthenticated());
