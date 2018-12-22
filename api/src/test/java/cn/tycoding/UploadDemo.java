@@ -1,6 +1,6 @@
 package cn.tycoding;
 
-import cn.tycoding.admin.dto.IdWorker;
+import cn.tycoding.admin.utils.IdWorker;
 import com.qiniu.common.QiniuException;
 import com.qiniu.common.Zone;
 import com.qiniu.http.Response;

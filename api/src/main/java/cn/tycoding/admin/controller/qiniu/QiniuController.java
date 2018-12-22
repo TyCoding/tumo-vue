@@ -1,9 +1,9 @@
 package cn.tycoding.admin.controller.qiniu;
 
-import cn.tycoding.admin.dto.IdWorker;
 import cn.tycoding.admin.dto.Result;
 import cn.tycoding.admin.dto.StatusCode;
 import cn.tycoding.admin.enums.ResultEnums;
+import cn.tycoding.admin.utils.IdWorker;
 import com.qiniu.common.Zone;
 import com.qiniu.http.Response;
 import com.qiniu.storage.Configuration;
