@@ -1,5 +1,6 @@
 package cn.tycoding.admin.controller;
 
+import cn.tycoding.admin.dto.PageBean;
 import cn.tycoding.admin.dto.Result;
 import cn.tycoding.admin.dto.StatusCode;
 import cn.tycoding.admin.entity.Comments;
@@ -67,9 +68,15 @@ public class CommentsController {
     @RequestMapping(value = "/findCommentsList", method = RequestMethod.GET)
     public Result findCommentsList(@RequestParam(value = "pageCode", required = false) Integer pageCode,
                                    @RequestParam(value = "pageSize", required = false) Integer pageSize,
-                                   @RequestParam(value = "articleId", required = false) Integer articleId) {
-        if (CheckValue.checkPageIds(pageCode, pageSize, articleId)) {
-            return new Result(StatusCode.SUCCESS, commentsService.findCommentsList(pageCode, pageSize, articleId, 0));
+                                   @RequestParam(value = "articleId", required = false) Integer articleId,
+                                   @RequestParam(value = "sort", required = false) Integer sort) {
+        if (pageCode == null) {
+            pageCode = 1; //默认查询第一页的评论数据
+        }
+        if (CheckValue.checkPage(pageCode, pageSize) && articleId != null) {
+            PageBean pageBean = commentsService.findCommentsList(pageCode, pageSize, articleId, sort);
+            pageBean.setTotal((long) Math.ceil((double) pageBean.getTotal() / (double) pageSize));
+            return new Result(StatusCode.SUCCESS, pageBean);
         }
         return new Result(StatusCode.PARAMETER_ERROR, ResultEnums.PARAMETER_ERROR);
     }

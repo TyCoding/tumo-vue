@@ -8,6 +8,7 @@ Vue.use(Router)
 
 /* Layout */
 import Layout from '../views/layout/Layout'
+import SiteLayout from '../site/layout/Layout'
 
 /**
  * hidden: true                   if `hidden:true` will not show in the sidebar(default is false)
@@ -22,6 +23,79 @@ import Layout from '../views/layout/Layout'
   }
  **/
 export const constantRouterMap = [
+
+    //====================index======================
+    {
+        path: '/',
+        component: SiteLayout,
+        name: 'index',
+        hidden: true,
+        redirect: '/index',
+        children: [{
+            path: '/',
+            component: () => import('@/site/index')
+        }]
+    },
+
+    {
+        path: '/page/:cp',
+        component: SiteLayout,
+        name: 'page',
+        hidden: true,
+        children: [{
+            path: '/page/:cp',
+            component: () => import('@/site/index')
+        }]
+    },
+
+    {
+        path: '/article/:id',
+        component: SiteLayout,
+        name: 'detail',
+        hidden: true,
+        children: [{
+            path: '/article/:id',
+            component: () => import('@/site/detail/index')
+        }]
+    },
+
+    {
+        path: '/archives',
+        component: SiteLayout,
+        name: 'archives',
+        hidden: true,
+        children: [{
+            path: '/archives',
+            component: () => import('@/site/archives/index')
+        }]
+    },
+
+    {
+        path: '/links',
+        component: SiteLayout,
+        name: 'links',
+        hidden: true,
+        children: [{
+            path: '/links',
+            component: () => import('@/site/links/index')
+        }]
+    },
+
+    {
+        path: '/about',
+        component: SiteLayout,
+        name: 'about',
+        hidden: true,
+        children: [{
+            path: '/about',
+            component: () => import('@/site/about/index')
+        }]
+    },
+
+
+
+
+    //====================admin======================
     {path: '/login', component: () => import('@/views/login/index'), hidden: true},
     {path: '/404', component: () => import('@/views/404'), hidden: true},
 
@@ -38,9 +112,10 @@ export const constantRouterMap = [
     },
 
     {
-        path: '',
+        path: '/admin',
         component: Layout,
-        redirect: 'dashboard',
+        redirect: '/admin/dashboard',
+        name: 'Dashboard',
         children: [
             {
                 path: 'dashboard',
@@ -52,9 +127,9 @@ export const constantRouterMap = [
     },
 
     {
-        path: '/article',
+        path: '/admin/article',
         component: Layout,
-        redirect: '/article/list',
+        redirect: '/admin/article/list',
         name: 'Article',
         meta: {
             title: 'article',
@@ -84,7 +159,7 @@ export const constantRouterMap = [
     },
 
     {
-        path: '/comments',
+        path: '/admin/comments',
         component: Layout,
         children: [
             {
@@ -97,7 +172,7 @@ export const constantRouterMap = [
     },
 
     {
-        path: '/cover',
+        path: '/admin/cover',
         component: Layout,
         children: [
             {
@@ -110,7 +185,7 @@ export const constantRouterMap = [
     },
 
     {
-        path: '/links',
+        path: '/admin/links',
         component: Layout,
         children: [
             {
@@ -135,7 +210,6 @@ export const constantRouterMap = [
         ]
     },
 
-
     {
         path: 'external-link',
         component: Layout,
@@ -147,11 +221,13 @@ export const constantRouterMap = [
         ]
     },
 
-    {path: '*', redirect: '/404', hidden: true}
+    {path: '*', redirect: '/404', hidden: true},
+
+
 ]
 
 export default new Router({
-    // mode: 'history', //后端支持可开
+    mode: 'history', //后端支持可开
     scrollBehavior: () => ({y: 0}),
-    routes: constantRouterMap
+    routes: constantRouterMap,
 })

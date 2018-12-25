@@ -1,5 +1,6 @@
 package cn.tycoding.admin.entity;
 
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 
 /**
@@ -9,7 +10,9 @@ import java.io.Serializable;
 public class Links implements Serializable {
 
     private long id; //编号
+    @NotNull
     private String name; //连接名称
+    @NotNull
     private String url; //连接URL
 
     public long getId() {

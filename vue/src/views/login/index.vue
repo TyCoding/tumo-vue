@@ -1,19 +1,23 @@
 <template>
-    <div class="login-container">
+    <div class="login-container" @click.stop="blank">
         <el-form ref="loginForm" :model="loginForm" :rules="loginRules" class="login-form" auto-complete="on"
                  label-position="left">
-            <h3 class="title">vue-admin-template</h3>
+            <div>
+                <img :src="bear"/>
+            </div>
+            <h3 class="title">Tumo Blog</h3>
             <el-form-item prop="username">
                 <span class="svg-container">
                   <svg-icon icon-class="user"/>
                 </span>
-                <el-input v-model="loginForm.username" name="username" type="text" auto-complete="on" placeholder="username"/>
+                <el-input v-model="loginForm.username" @click.native.stop="greeting" name="username" type="text" auto-complete="on" placeholder="username"/>
             </el-form-item>
             <el-form-item prop="password">
                 <span class="svg-container">
                   <svg-icon icon-class="password"/>
                 </span>
                 <el-input
+                    @click.native.stop="blindfold"
                     :type="pwdType"
                     v-model="loginForm.password"
                     name="password"
@@ -58,6 +62,13 @@
                 }
             }
             return {
+                img: {
+                    normal: 'http://cdn.tycoding.cn/normal.0447fe9.png',
+                    blindfold: 'http://cdn.tycoding.cn/blindfold.58ce423.png',
+                    greeting: 'http://cdn.tycoding.cn/greeting.1415c1c.png'
+                },
+                bear: 'http://cdn.tycoding.cn/normal.0447fe9.png',
+
                 loginForm: {
                     username: 'tycoding',
                     password: '123456'
@@ -80,6 +91,16 @@
             }
         },
         methods: {
+            blank() {
+                this.bear = this.img.normal;
+            },
+            blindfold() {
+                this.bear = this.img.blindfold;
+            },
+            greeting() {
+                this.bear = this.img.greeting;
+            },
+
             showPwd() {
                 if (this.pwdType === 'password') {
                     this.pwdType = ''
@@ -93,7 +114,7 @@
                         this.loading = true
                         this.$store.dispatch('Login', this.loginForm).then(() => {
                             this.loading = false
-                            this.$router.push({path: this.redirect || '/'})
+                            this.$router.push({path: this.redirect || '/admin'})
                         }).catch(() => {
                             this.loading = false
                         })
@@ -123,7 +144,6 @@
                 -webkit-appearance: none;
                 border-radius: 0px;
                 padding: 12px 5px 12px 15px;
-                color: $light_gray;
                 height: 47px;
                 &:-webkit-autofill {
                     -webkit-box-shadow: 0 0 0px 1000px $bg inset !important;
@@ -133,9 +153,11 @@
         }
         .el-form-item {
             border: 1px solid rgba(255, 255, 255, 0.1);
-            background: rgba(0, 0, 0, 0.1);
             border-radius: 5px;
             color: #454545;
+            .el-form-item__content {
+                border-bottom: 1px solid #dcdfe6;
+            }
         }
     }
 
@@ -149,15 +171,27 @@
         position: fixed;
         height: 100%;
         width: 100%;
-        background-color: $bg;
+        background-color: #b8e5f8;
+        background-image: url("http://cdn.tycoding.cn/db29b0fbd2f78dd8c1b7.db29b0f.png");
         .login-form {
             position: absolute;
             left: 0;
             right: 0;
-            width: 520px;
+            width: 432px;
             max-width: 100%;
             padding: 35px 35px 15px 35px;
             margin: 120px auto;
+            background-color: #fff;
+
+            div>img{
+                position: absolute;
+                top: 0;
+                left: 50%;
+                width: 10rem;
+                -webkit-transform: translate(-50%, -83%);
+                transform: translate(-50%, -83%);
+                z-index: 1;
+            }
         }
         .tips {
             font-size: 14px;
@@ -171,7 +205,6 @@
         }
         .svg-container {
             padding: 6px 5px 6px 15px;
-            color: $dark_gray;
             vertical-align: middle;
             width: 30px;
             display: inline-block;
@@ -179,7 +212,7 @@
         .title {
             font-size: 26px;
             font-weight: 400;
-            color: $light_gray;
+            color: #0084ff;
             margin: 0px auto 40px auto;
             text-align: center;
             font-weight: bold;

@@ -28,7 +28,7 @@ public class LinksController {
 
     @RequestMapping(value = "/findAll", method = RequestMethod.GET)
     public Result findAll() {
-        return new Result(StatusCode.SUCCESS, linksService.findAllCount());
+        return new Result(StatusCode.SUCCESS, linksService.findAll());
     }
 
     @RequestMapping(value = "/findByPage", method = RequestMethod.POST)

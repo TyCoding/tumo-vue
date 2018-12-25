@@ -1,5 +1,6 @@
 package cn.tycoding.admin.controller;
 
+import cn.tycoding.admin.dto.PageBean;
 import cn.tycoding.admin.dto.Result;
 import cn.tycoding.admin.dto.StatusCode;
 import cn.tycoding.admin.entity.Article;
@@ -12,7 +13,6 @@ import cn.tycoding.admin.utils.CheckValue;
 import com.alibaba.fastjson.JSON;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -57,6 +57,18 @@ public class ArticleController {
         }
     }
 
+    @RequestMapping(value = "/findByPageForSite", method = RequestMethod.POST)
+    public Result findByPageForSite(@RequestParam(value = "pageCode", required = false) Integer pageCode,
+                                    @RequestParam(value = "pageSize", required = false) Integer pageSize) {
+        if (CheckValue.checkPage(pageCode, pageSize)) {
+            PageBean pageBean = articleService.findByPageForSite(pageCode, pageSize);
+            pageBean.setTotal((long) Math.ceil((double) pageBean.getTotal() / (double) pageSize));
+            return new Result(StatusCode.SUCCESS, pageBean);
+        } else {
+            return new Result(StatusCode.ERROR, ResultEnums.PARAMETER_ERROR);
+        }
+    }
+
     @RequestMapping(value = "/findById", method = RequestMethod.GET)
     public Result findById(@RequestParam("id") Long id, Model model) {
         if (CheckValue.checkId(id)) {
@@ -98,7 +110,7 @@ public class ArticleController {
     }
 
     @RequestMapping(value = "/save", method = RequestMethod.POST)
-    public Result save(@Validated @RequestBody Article article) {
+    public Result save(@RequestBody Article article) {
         if (CheckValue.checkObj(article)) {
             try {
                 articleService.save(article);
