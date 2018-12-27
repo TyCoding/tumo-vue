@@ -1,6 +1,6 @@
 <template>
     <div class="editor-container">
-        <markdown-editor v-model="md" height="600px"></markdown-editor>
+        <markdown-editor ref="markdownEditor" v-model="md" height="600px"></markdown-editor>
     </div>
 </template>
 
@@ -10,18 +10,15 @@
     export default {
         name: 'markdown',
         components: {MarkdownEditor},
-        props: {
-            content: {
-                type: String,
-                default: ''
-            }
-        },
+        props: ['content'],
         data() {
             return {
                 markdownId: this.id,
-                // content: '',
                 md: '',
-                html: '',
+                editor: {
+                    md: '',
+                    html: '',
+                },
                 languageTypeList: {
                     'en': 'en_US',
                     'zh': 'zh_CN',
@@ -33,11 +30,13 @@
         },
         watch: {
             content(newVal, oldVal) {
-                this.md = newVal; //监听父组件传来的content数据，只会执行一次，用来给子组件赋初始值
+                this.editor.md = newVal; //监听父组件传来的content数据，只会执行一次，用来给子组件赋初始值
             },
             md(newVal, oldVal) {
                 //监听子组件中数据
-                this.$emit('updateContent', newVal);
+                this.editor.html = this.$refs.markdownEditor.getHtml();
+                this.editor.md = newVal;
+                this.$emit('editor', this.editor);
             }
         },
         computed: {
@@ -45,12 +44,6 @@
                 return this.languageTypeList[this.$store.getters.language]
             }
         },
-        methods: {
-            getHtml() {
-                this.html = this.$refs.markdownEditor.getHtml();
-                console.log(this.html)
-            }
-        }
     }
 </script>
 

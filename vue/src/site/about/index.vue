@@ -15,9 +15,8 @@
                 <br/>
                 <br/>
                 <h1>About</h1>
-                <p style="margin-bottom: 10px;">Hi! 你好，我是TyCoding, 专注Java开发， 喜欢代码艺术， 关注新技术</p>
+                <p style="margin-bottom: 10px;">Hi! 你好，我是TyCoding, 菜鸡一枚。</p>
                 <p>喜欢运动， 音乐</p>
-                <br/>
                 <br/>
                 <h1>Works</h1>
                 <ul>
@@ -27,7 +26,6 @@
                     <li><a href="https://github.com/TyCoding/ssm-redis-solr">ssm-redis-solr:</a>基于SSM、Shiro、Redis、Solr框架简单实现电商项目中搜索功能</li>
                     <li><a href="https://github.com/TyCoding/ssm">ssm:</a> Spring、SpringMVC、Mybatis框架整合开发</li>
                 </ul>
-                <br/>
                 <br/>
                 <h1>Concat</h1>
                 <img src="http://cdn.tycoding.cn/qq.png">

@@ -25,6 +25,7 @@
         "screenfull": "^3.3.3",
         "tui-editor": "^1.2.8",
         "vue": "2.5.17",
+        "vue-clipboard2": "^0.2.1",
         "vue-count-to": "^1.0.13",
         "vue-i18n": "^8.4.0",
         "vue-router": "3.0.1",

@@ -195,7 +195,6 @@
         }
         .tips {
             font-size: 14px;
-            color: #fff;
             margin-bottom: 10px;
             span {
                 &:first-of-type {

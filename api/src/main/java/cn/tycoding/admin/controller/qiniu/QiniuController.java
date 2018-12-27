@@ -40,16 +40,13 @@ public class QiniuController {
     IdWorker idWorker = new IdWorker(); //分布式ID生成器，用于设定上传文件的名称
 
     //设置好账号的ACCESS_KEY和SECRET_KEY
-//    private static final String ACCESS_KEY = "Access_Key";
-    private static final String ACCESS_KEY = "ShNkTksRRD57KgoO7ppPo1jfn1Jaj_YqWlj5jWjQ";
-    //    private static final String SECRET_KEY = "Secret_Key";
-    private static final String SECRET_KEY = "1YrjBCcEgvsFoVJNcAbrXXQpiOxMMdnPR2PJQ-Z5";
+    private static final String ACCESS_KEY = "Access_Key";
+        private static final String SECRET_KEY = "Secret_Key";
     //要上传的空间
-//    private static final String BUCKETNAME = "Bucket_Name";
-    private static final String BUCKETNAME = "images";
+    private static final String BUCKETNAME = "Bucket_Name";
 
     //个人七牛云对象储存外链域名地址
-    private static final String url = "http://img.api.tycoding.cn/";
+    private static final String url = "http://";
 
     /**
      * 文件上传接口，调用七牛云开放的API
