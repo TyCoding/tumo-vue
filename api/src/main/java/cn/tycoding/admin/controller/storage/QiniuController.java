@@ -57,16 +57,13 @@ public class QiniuController {
     IdWorker idWorker = new IdWorker(); //分布式ID生成器，用于设定上传文件的名称
 
     //设置好账号的ACCESS_KEY和SECRET_KEY
-//    private static final String ACCESS_KEY = "Access_Key";
-    private static final String ACCESS_KEY = "ShNkTksRRD57KgoO7ppPo1jfn1Jaj_YqWlj5jWjQ";
-    //    private static final String SECRET_KEY = "Secret_Key";
-    private static final String SECRET_KEY = "1YrjBCcEgvsFoVJNcAbrXXQpiOxMMdnPR2PJQ-Z5";
+    private static final String ACCESS_KEY = "Access_Key";
+    private static final String SECRET_KEY = "Secret_Key";
     //要上传的空间
-//    private static final String BUCKETNAME = "Bucket_Name";
-    private static final String BUCKETNAME = "images";
+    private static final String BUCKETNAME = "Bucket_Name";
 
     //个人七牛云对象储存外链域名地址
-    private static final String url = "http://img.api.tycoding.cn/";
+    private static final String url = "http://xxx/";
 
     /**
      * 获取七牛云个人储存空间域名地址
@@ -199,7 +196,7 @@ public class QiniuController {
             URL url = new URL(fileUrl);
             //打开一个连接
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-            connection.setConnectTimeout(3*1000);
+            connection.setConnectTimeout(3 * 1000);
 
             //获取输入流
             InputStream inputStream = connection.getInputStream();
@@ -219,7 +216,7 @@ public class QiniuController {
             //设置请求头的媒体格式类型为 application/octet-stream(二进制流数据)
             headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
             System.out.println(fileUrl);
-            return new ResponseEntity<byte[]>(outputStream.toByteArray(),headers, HttpStatus.CREATED);
+            return new ResponseEntity<byte[]>(outputStream.toByteArray(), headers, HttpStatus.CREATED);
         } catch (Exception e) {
             e.printStackTrace();
             return null;
