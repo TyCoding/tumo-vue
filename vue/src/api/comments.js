@@ -32,3 +32,11 @@ export function findCommentsList(pageCode, pageSize, articleId, sort) {
         method: 'get',
     })
 }
+
+export function deleteById(ids) {
+    return request({
+        url: '/comments/delete',
+        method: 'post',
+        data: ids
+    })
+}

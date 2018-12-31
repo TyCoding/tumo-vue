@@ -18,8 +18,9 @@
             <el-table-column label="操作" align="center" fixed="right">
                 <template slot-scope="scope">
                     <el-button icon="el-icon-delete" size="mini" type="danger" @click="handleDelete(scope.row.id)">删除</el-button>
-                    <el-button size="mini" icon="el-icon-edit" type="warning">编辑</el-button>
-                    <el-button size="mini" icon="el-icon-view" type="primary">预览</el-button>
+                    <router-link :to="(scope.row.sort == 0) ? ( '/article/' + scope.row.articleId) : '/'" target="_blank">
+                        <el-button size="mini" icon="el-icon-view" type="primary">预览</el-button>
+                    </router-link>
                 </template>
             </el-table-column>
         </el-table>
@@ -30,7 +31,7 @@
 </template>
 
 <script>
-    import {findByPage} from '@/api/comments'
+    import {findByPage,deleteById} from '@/api/comments'
     import Pagination from '@/components/Pagination'
 
     export default {
@@ -62,8 +63,34 @@
                 })
             },
 
-            handleDelete(id) {
-
+            handleDelete(id){
+                this.$confirm('你确定永久删除此用户信息？', '提示', {
+                    confirmButtonText: '确定',
+                    cancelButtonText: '取消',
+                    type: 'warning',
+                    center: true
+                }).then(() => {
+                    var ids = [];
+                    ids.push(id);
+                    deleteById(ids).then(response => {
+                        var flag = 'success';
+                        if (response.code != 20000) {
+                            flag = 'error'
+                        }
+                        this.$message({
+                            type: flag,
+                            message: response.data,
+                            duration: 6000
+                        });
+                    });
+                    this.getList();
+                }).catch(() => {
+                    this.$message({
+                        type: 'info',
+                        message: '已取消删除',
+                        duration: 6000
+                    });
+                });
             }
         },
     }

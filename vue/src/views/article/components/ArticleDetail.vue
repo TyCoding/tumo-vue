@@ -22,14 +22,14 @@
                         <div class="postInfo-container">
                             <el-row>
                                 <el-col :span="8" :xs="{span: 24}" :sm="{span: 24}" :md="{span: 8}" :lg="{span: 8}" :xl="{span: 8}">
-                                    <el-form-item label-width="45px" label="作者:" class="postInfo-container-item">
-                                        <el-input v-model="postForm.author" placeholder="文章作者" style="min-width: 195px;"/>
+                                    <el-form-item prop="author" label-width="45px" label="作者:" class="postInfo-container-item">
+                                        <el-input v-model="postForm.author" placeholder="文章作者" style="min-width: 195px;" required/>
                                     </el-form-item>
                                 </el-col>
 
                                 <el-col :span="10" :xs="{span: 24}" :sm="{span: 24}" :md="{span: 8}" :lg="{span: 8}" :xl="{span: 8}">
                                     <el-form-item label-width="72px" label="发布时间:" class="postInfo-container-item">
-                                        <el-date-picker v-model="postForm.publishTime" value-format="yyyy-MM-dd HH:mm:ss" type="datetime"
+                                        <el-date-picker value-format="yyyy-MM-dd HH:mm:ss" type="datetime"
                                                         format="yyyy-MM-dd HH:mm:ss" placeholder="选择日期时间"/>
                                     </el-form-item>
                                 </el-col>
@@ -72,23 +72,26 @@
                     </el-col>
                 </el-row>
 
-                <el-form-item style="margin-bottom: 40px;" label-width="45px" label="摘要:">
+                <el-form-item prop="contentShort" style="margin-bottom: 40px;" label-width="45px" label="摘要:">
                     <el-input :rows="1" v-model="postForm.content_short" type="textarea" class="article-textarea"
                               autosize placeholder="请输入内容"/>
                     <span v-show="contentShortLength" class="word-counter">{{ contentShortLength }}字</span>
                 </el-form-item>
 
                 <div class="tinymce-container editor-container">
+                    <div class="editor-custom-btn-container" v-if="!isEdit">
+                        <span class="tips">
+                            <span v-if="!saveFlag"><i class="el-icon-loading"></i>保存中...</span>
+                            <span v-if="saveFlag">已保存</span>
+                        </span>
+                    </div>
                     <!-- Markdown富文本组件 -->
                     <markdown :content="postForm.contentMd" @editor="editor"></markdown>
-                    <div class="editor-custom-btn-container">
-                        <editorImage color="#1890ff" class="editor-upload-btn" @successCBK="imageSuccessCBK"/>
-                    </div>
+                </div>
+                <div style="margin-bottom: 20px;">
+                    <Upload v-model="postForm.titlePic"/>
                 </div>
 
-                <!--<div style="margin-bottom: 20px;">
-                    <Upload v-model="postForm.title_pic"/>
-                </div>-->
             </div>
         </el-form>
 
@@ -96,13 +99,12 @@
 </template>
 
 <script>
-    import editorImage from '@/components/Upload/editorImage'
     import markdown from './markdown'
     import Upload from '@/components/Upload/singleImage3'
     import MDinput from '@/components/MDinput'
     import Sticky from '@/components/Sticky' // 粘性header组件
     import {validateURL} from '@/utils/validate'
-    import {findById} from '@/api/article'
+    import {findById,save} from '@/api/article'
     import {userSearch} from '@/api/remoteSearch'
     import Warning from './Warning'
     import {CommentDropdown, PlatformDropdown, SourceUrlDropdown} from './Dropdown'
@@ -114,7 +116,7 @@
         content_short: '', // 文章摘要
         origin: '', // 文章外链
         titlePic: '', // 文章图片
-        publishTime: undefined, // 前台展示时间
+        publishTime: '', // 前台展示时间
         id: undefined,
         platforms: ['a-platform'],
         comment_disabled: false,
@@ -125,7 +127,7 @@
 
     export default {
         name: 'ArticleDetail',
-        components: {markdown, editorImage, MDinput, Upload, Sticky, Warning, CommentDropdown, PlatformDropdown, SourceUrlDropdown},
+        components: {markdown, MDinput, Upload, Sticky, Warning, CommentDropdown, PlatformDropdown, SourceUrlDropdown},
         props: {
             isEdit: {
                 type: Boolean,
@@ -164,6 +166,7 @@
                 loading: false,
                 userListOptions: [],
                 rules: {
+                    author: [{validator: validateRequire, trigger: 'blur'}],
                     titlePic: [{validator: validateRequire}],
                     title: [{validator: validateRequire}],
                     content: [{validator: validateRequire}],
@@ -173,6 +176,8 @@
                 //tags
                 dynamicTags: [],
                 inputVisible: false,
+
+                saveFlag: true, //是否保存
 
                 tempRoute: {}
             }
@@ -201,9 +206,9 @@
         methods: {
             fetchData(id) {
                 findById(id).then(response => {
+                    this.dynamicTags = eval(response.data.tags);
                     this.postForm = response.data;
                     // Just for test
-                    this.postForm.title += `   Article Id:${this.postForm.id}`;
                     this.postForm.content_short += `   Article Id:${this.postForm.id}`;
 
                     // Set tagsview title
@@ -217,20 +222,33 @@
                 const route = Object.assign({}, this.tempRoute, {title: `${title}-${this.postForm.id}`});
                 this.$store.dispatch('updateVisitedView', route)
             },
+            //发布
             submitForm() {
                 this.postForm.tags = JSON.stringify(this.dynamicTags); //给tags字段赋值
-                this.postForm.publishTime = parseInt(this.publishTime / 1000);
+                // this.postForm.publishTime = parseInt(this.publishTime / 1000);
+                this.postForm.status = 'published';
                 console.log(this.postForm);
                 this.$refs.postForm.validate(valid => {
                     if (valid) {
                         this.loading = true;
-                        this.$notify({
-                            title: '成功',
-                            message: '发布文章成功',
-                            type: 'success',
-                            duration: 2000
-                        });
-                        this.postForm.status = 'published';
+                        save(this.postForm).then(response => {
+                            if (response.code == 20000) {
+                                this.$notify({
+                                    title: '成功',
+                                    message: response.data,
+                                    type: 'success',
+                                    duration: 2000
+                                });
+                                this.$router.push('/admin/article/list?xx')
+                            } else {
+                                this.$notify({
+                                    title: '失败',
+                                    message: response.data,
+                                    type: 'warning',
+                                    duration: 2000
+                                });
+                            }
+                        })
                         this.loading = false
                     } else {
                         console.log('error submit!!');
@@ -238,22 +256,37 @@
                     }
                 })
             },
+            //草稿
             draftForm() {
                 this.postForm.tags = JSON.stringify(this.dynamicTags); //给tags字段赋值
+                this.postForm.status = 'draft'
+                console.log(this.postForm);
                 if (this.postForm.content.length === 0 || this.postForm.title.length === 0) {
                     this.$message({
                         message: '请填写必要的标题和内容',
                         type: 'warning'
                     });
                     return
+                } else {
+                    save(this.postForm).then(response => {
+                        if (response.code == 20000) {
+                            this.$notify({
+                                title: '成功',
+                                message: response.data,
+                                type: 'success',
+                                duration: 2000
+                            });
+                            this.$router.push('/admin/article/list?xx')
+                        } else {
+                            this.$notify({
+                                title: '失败',
+                                message: response.data,
+                                type: 'warning',
+                                duration: 2000
+                            });
+                        }
+                    })
                 }
-                this.$message({
-                    message: '保存成功',
-                    type: 'success',
-                    showClose: true,
-                    duration: 1000
-                });
-                this.postForm.status = 'draft'
             },
             getRemoteUserList(query) {
                 userSearch(query).then(response => {
@@ -261,15 +294,23 @@
                     this.userListOptions = response.data.items.map(v => v.name);
                 })
             },
-            imageSuccessCBK(arr) {
-                console.log(arr);
-                const _this = this;
-                arr.forEach(v => {
-                })
+
+            //定时任务，实现定时保存文章数据
+            interval() {
+                this.saveFlag = false;
+                this.draftForm(); //定时将文章数据保存到草稿箱中
+                this.saveFlag = true;
             },
             editor(val){
                 this.postForm.contentMd = val.md;
                 this.postForm.content = val.html;
+
+                if (this.isEdit) { //如果是修改操作，就定时保存文章数据
+                    //定时器，每隔4秒执行一次
+                    setTimeout(() => {
+                        this.interval()
+                    }, 4000)
+                }
             },
 
             //===============标签==================
@@ -348,20 +389,16 @@
 
     .editor-custom-btn-container {
         position: absolute;
-        right: 4px;
-        top: 4px;
+        right: 106px;
+        top: 7px;
         /*z-index: 2005;*/
+        .tips {
+            margin-right: 5px;
+            font-size: 10px;
+        }
     }
-
-    .fullscreen .editor-custom-btn-container {
+    .editor-custom-btn-container {
         z-index: 10000;
-        position: fixed;
     }
 
-    .editor-upload-btn {
-        display: inline-block;
-    }
-    .el-button--mini, .el-button--mini.is-round {
-        padding: 6px 15px;
-    }
 </style>

@@ -13,7 +13,7 @@
                 :on-success="handleSuccess"
                 :before-upload="beforeUpload"
                 class="editor-slide-upload"
-                action="https://httpbin.org/post"
+                action="http://127.0.0.1:8084/qiniu/upload"
                 list-type="picture-card">
                 <i class="el-icon-upload"></i>
                 <div class="el-upload__text">将文件拖到此处，或<em>点击上传</em></div>
@@ -25,7 +25,7 @@
 </template>
 
 <script>
-    // import { getToken } from 'api/qiniu'
+    // import { getToken } from 'api/storage'
 
     export default {
         name: 'editorImage',
@@ -62,7 +62,7 @@
                 const objKeyArr = Object.keys(this.listObj)
                 for (let i = 0, len = objKeyArr.length; i < len; i++) {
                     if (this.listObj[objKeyArr[i]].uid === uid) {
-                        this.listObj[objKeyArr[i]].url = response.files.file
+                        this.listObj[objKeyArr[i]].url = response.data.url
                         this.listObj[objKeyArr[i]].hasSuccess = true
                         return
                     }

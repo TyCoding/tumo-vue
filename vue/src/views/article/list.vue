@@ -16,7 +16,7 @@
             </el-table-column>
             <el-table-column label="操作" align="center" width="230" class-name="small-padding fixed-width">
                 <template slot-scope="scope">
-                    <router-link :to="'/article/edit/' + scope.row.id">
+                    <router-link :to="'/admin/article/edit/' + scope.row.id">
                         <el-button size="mini" icon="el-icon-edit" type="warning"></el-button>
                     </router-link>
                     <el-button size="mini" icon="el-icon-view" type="primary"></el-button>

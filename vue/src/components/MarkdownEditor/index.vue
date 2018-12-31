@@ -7,10 +7,9 @@
     import 'codemirror/lib/codemirror.css' // codemirror
     import 'tui-editor/dist/tui-editor.css' // editor ui
     import 'tui-editor/dist/tui-editor-contents.css' // editor content
-
     import Editor from 'tui-editor'
+    import 'tui-editor/dist/tui-editor-extScrollSync.js'
     import defaultOptions from './defaultOptions'
-
     export default {
         name: 'MarddownEditor',
         props: {
@@ -102,7 +101,7 @@
                 this.editor.remove()
             },
             setValue(value) {
-                this.editor.setValue(value)
+                this.editor.setValue(value,false)
             },
             getValue() {
                 return this.editor.getValue()

@@ -1,6 +1,6 @@
 <template>
     <div class="cover-container">
-        <pic-card :list="list"></pic-card>
+        <pic-card :list="list" @refushFlag="refushFlag"></pic-card>
 
         <pagination v-show="total>0" :total="total" :page.sync="listQuery.pageCode" :limit.sync="listQuery.pageSize"
                     @pagination="getList"/>
@@ -40,6 +40,12 @@
                     }
                 })
             },
+            refushFlag(val) {
+                console.log('父组件中接收到的值：' + val);
+                if (val) {
+                    this.getList();
+                }
+            }
         },
 
     }

@@ -127,6 +127,17 @@ export const constantRouterMap = [
     },
 
     {
+        path: 'github',
+        component: Layout,
+        children: [
+            {
+                path: 'https://github.com/TyCoding/tumo',
+                meta: {title: 'github', icon: 'github'}
+            }
+        ]
+    },
+
+    {
         path: '/admin/article',
         component: Layout,
         redirect: '/admin/article/list',
@@ -163,10 +174,10 @@ export const constantRouterMap = [
         component: Layout,
         children: [
             {
-                path: 'index',
+                path: '',
                 name: 'comments',
                 component: () => import('@/views/comments/index'),
-                meta: {title: 'comments', icon: 'message'}
+                meta: {title: 'comments', icon: 'wechat'}
             }
         ]
     },
@@ -176,7 +187,7 @@ export const constantRouterMap = [
         component: Layout,
         children: [
             {
-                path: 'index',
+                path: '',
                 name: 'cover',
                 component: () => import('@/views/cover/index'),
                 meta: {title: 'cover', icon: 'img'}
@@ -189,34 +200,60 @@ export const constantRouterMap = [
         component: Layout,
         children: [
             {
-                path: 'index',
+                path: '',
                 name: 'links',
                 component: () => import('@/views/links/index'),
-                meta: {title: 'links', icon: 'links'}
+                meta: {title: 'links', icon: 'link'}
             }
         ]
     },
 
     {
-        path: '/file',
+        path: '/admin/tags',
         component: Layout,
         children: [
             {
-                path: 'index',
-                name: 'file',
+                path: '',
+                name: 'tags',
+                component: () => import('@/views/tags/index'),
+                meta: {title: 'tags', icon: 'tags'}
+            }
+        ]
+    },
+
+    {
+        path: '/admin/file',
+        component: Layout,
+        name: 'file',
+        meta: {
+            title: 'file',
+            icon: 'tools'
+        },
+        children: [
+            {
+                path: 'os',
+                component: () => import('@/views/file/OS'),
+                name: 'os',
+                meta: {title: 'os', icon: 'cloud'}
+            },
+            {
+                path: 'localOS',
+                component: () => import('@/views/file/LocalOS'),
+                name: 'localOS',
+                meta: {title: 'localOS', icon: 'localyun'}
+            }
+        ]
+    },
+
+    {
+        path: '/admin/system',
+        component: Layout,
+        children: [
+            {
+                path: '',
+                name: 'system',
                 component: () => import('@/views/file/index'),
-                meta: {title: 'file', icon: 'upload'}
-            }
-        ]
-    },
-
-    {
-        path: 'external-link',
-        component: Layout,
-        children: [
-            {
-                path: 'https://panjiachen.github.io/vue-element-admin-site/#/',
-                meta: {title: 'External Link', icon: 'link'}
+                meta: {title: 'system', icon: 'system'}
             }
         ]
     },

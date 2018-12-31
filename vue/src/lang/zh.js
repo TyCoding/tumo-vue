@@ -9,6 +9,11 @@ export default {
         cover: '封面管理',
         links: '友链管理',
         file: '文件管理',
+        os: '对象储存',
+        localOS: '本地云储存',
+        tags: '标签/分类',
+        github: '项目地址',
+        system: '系统管理',
 
 
         introduction: '简述',

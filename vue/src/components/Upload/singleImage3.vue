@@ -31,7 +31,7 @@
 </template>
 
 <script>
-    import {getToken} from '@/api/qiniu'
+    import {getToken} from '@/api/storage'
 
     export default {
         name: 'SingleImageUpload3',
@@ -60,7 +60,8 @@
                 this.$emit('input', val)
             },
             handleImageSuccess(file) {
-                this.emitInput(file.files.file)
+                console.log(file);
+                this.emitInput(file.data.url)
             },
             beforeUpload() {
                 const _self = this
@@ -152,6 +153,9 @@
                 line-height: 64px;
                 color: #fff;
             }
+        }
+        .image-uploader{
+            border: 1px dashed #d9d9d9;
         }
     }
 </style>

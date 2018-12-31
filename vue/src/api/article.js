@@ -25,6 +25,22 @@ export function findByPage(pageCode, pageSize) {
     })
 }
 
+export function save(obj) {
+    return request({
+        url: '/article/save',
+        method: 'post',
+        data: obj
+    })
+}
+
+export function update(obj) {
+    return request({
+        url: '/article/update',
+        method: 'put',
+        data: obj
+    })
+}
+
 export function findByPageForSite(pageCode, pageSize) {
     return request({
         url: '/article/findByPageForSite',
