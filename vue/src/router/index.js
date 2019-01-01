@@ -139,8 +139,32 @@ export const constantRouterMap = [
         component: Layout,
         children: [
             {
-                path: 'https://github.com/TyCoding/tumo',
+                path: 'https://github.com/TyCoding/tumo-vue',
                 meta: {title: 'github', icon: 'github'}
+            }
+        ]
+    },
+
+    {
+        path: '/admin/doc',
+        component: Layout,
+        name: 'doc',
+        meta: {
+            title: 'doc',
+            icon: 'doc'
+        },
+        children: [
+            {
+                path: 'api',
+                name: 'api',
+                component: () => import('@/views/doc/API'),
+                meta: {title: 'api', icon: 'api'}
+            },
+            {
+                path: 'router',
+                component: () => import('@/views/doc/Router'),
+                name: 'router',
+                meta: {title: 'router', icon: 'router'}
             }
         ]
     },
@@ -260,7 +284,7 @@ export const constantRouterMap = [
             {
                 path: '',
                 name: 'system',
-                component: () => import('@/views/file/index'),
+                component: () => import('@/views/system/index'),
                 meta: {title: 'system', icon: 'system'}
             }
         ]

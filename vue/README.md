@@ -16,6 +16,9 @@ npm run build
 ```
 
 
+![](http://cdn.tycoding.cn/tumo-vue-002.png)
+
+
 # Notes
 
 > 父组件如何给子组件传值？

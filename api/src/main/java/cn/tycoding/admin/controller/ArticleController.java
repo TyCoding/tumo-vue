@@ -57,6 +57,21 @@ public class ArticleController {
         }
     }
 
+    /**
+     * 为前端服务 -- 根据文章标题查询
+     *
+     * @param title
+     * @return
+     */
+    @RequestMapping(value = "/search", method = RequestMethod.GET)
+    public Result find(@RequestParam("title") String title) {
+        if (title != null) {
+            return new Result(StatusCode.SUCCESS, articleService.findFuzzyByTitle(title));
+        } else {
+            return new Result(StatusCode.ERROR, ResultEnums.PARAMETER_ERROR);
+        }
+    }
+
     @RequestMapping(value = "/findByPageForSite", method = RequestMethod.POST)
     public Result findByPageForSite(@RequestParam(value = "pageCode", required = false) Integer pageCode,
                                     @RequestParam(value = "pageSize", required = false) Integer pageSize) {

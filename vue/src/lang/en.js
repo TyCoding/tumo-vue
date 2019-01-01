@@ -14,6 +14,9 @@ export default {
         tags: 'Tags/Category',
         github: 'Github Link',
         system: 'System',
+        api: 'API',
+        doc: 'Document',
+        router: 'Router',
 
 
         introduction: 'Introduction',

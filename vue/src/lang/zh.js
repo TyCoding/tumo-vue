@@ -14,6 +14,9 @@ export default {
         tags: '标签/分类',
         github: '项目地址',
         system: '系统管理',
+        api: 'API 接口',
+        doc: '开发文档',
+        router: '路由地址',
 
 
         introduction: '简述',
