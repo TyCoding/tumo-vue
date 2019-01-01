@@ -10,11 +10,11 @@
         </el-row>
 
         <el-row :gutter="8">
-            <el-col :xs="{span: 24}" :sm="{span: 24}" :md="{span: 24}" :lg="{span: 12}" :xl="{span: 12}" style="padding-right:8px;margin-bottom:30px;">
-                <transaction-table/>
+            <el-col :xs="{span: 24}" :sm="{span: 20}" :md="{span: 20}" :lg="{span: 10}" :xl="{span: 10}" style="padding-right:8px;margin-bottom:30px;">
+                <new-article/>
             </el-col>
-            <el-col :xs="{span: 24}" :sm="{span: 12}" :md="{span: 12}" :lg="{span: 6}" :xl="{span: 6}" style="margin-bottom:30px;">
-                <todo-list/>
+            <el-col :xs="{span: 24}" :sm="{span: 16}" :md="{span: 16}" :lg="{span: 8}" :xl="{span: 8}" style="margin-bottom:30px;">
+                <new-comments/>
             </el-col>
             <el-col :xs="{span: 24}" :sm="{span: 12}" :md="{span: 12}" :lg="{span: 6}" :xl="{span: 6}" style="margin-bottom:30px;">
                 <box-card/>
@@ -28,8 +28,8 @@
     import GithubCorner from '@/components/GithubCorner'
     import PanelGroup from './components/PanelGroup'
     import LineChart from './components/LineChart'
-    import TransactionTable from './components/TransactionTable'
-    import TodoList from './components/TodoList'
+    import NewArticle from './components/NewArticle'
+    import NewComments from './components/NewComments'
     import BoxCard from './components/BoxCard'
 
     const lineChartData = {
@@ -57,8 +57,8 @@
             GithubCorner,
             PanelGroup,
             LineChart,
-            TransactionTable,
-            TodoList,
+            NewArticle,
+            NewComments,
             BoxCard
         },
         data() {

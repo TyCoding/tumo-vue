@@ -52,6 +52,16 @@ export function findByPageForSite(pageCode, pageSize) {
     })
 }
 
+export function search(title) {
+    return request({
+        url: '/article/search',
+        method: 'get',
+        params: {
+            title
+        }
+    })
+}
+
 export function deleteById(ids) {
     return request({
         url: '/article/delete',

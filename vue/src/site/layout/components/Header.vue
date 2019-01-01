@@ -10,12 +10,11 @@
                 <router-link to="/about">关于</router-link>
             </div>
             <div class="navbar-search" onclick="">
-                <span class="icon-search"></span>
+                <span @click="search" class="icon-search"></span>
                 <form role="search" onsubmit="return false;">
-                <span class="search-box">
-                    <input type="text" id="search-inp" class="input" placeholder="搜索..." maxlength="30"
-                           autocomplete="off">
-                </span>
+                    <span class="search-box">
+                        <input type="text" v-model="qu" @keyup.enter="search" id="search-inp" class="input" placeholder="搜索..." maxlength="30" autocomplete="off">
+                    </span>
                 </form>
             </div>
             <div class="navbar-mobile-menu">
@@ -36,6 +35,8 @@
         name: "Header",
         data() {
             return {
+                qu: null,
+
                 offsetTop: 0,   // 触发bar浮动的阈值
                 headerClass: '', //给Header设置样式
             }
@@ -48,6 +49,12 @@
             window.addEventListener('scroll', this.handleScroll);
         },
         methods: {
+
+            search() {
+                if (this.qu != null) {
+                    this.$router.push('/search/' + this.qu);
+                }
+            },
 
             // 滚动监听  滚动触发的效果写在这里
             handleScroll() {

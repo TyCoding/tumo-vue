@@ -30,7 +30,6 @@ export const constantRouterMap = [
         component: SiteLayout,
         name: 'index',
         hidden: true,
-        redirect: '/index',
         children: [{
             path: '/',
             component: () => import('@/site/index')
@@ -92,7 +91,16 @@ export const constantRouterMap = [
         }]
     },
 
-
+    {
+        path: '/search/:qu',
+        component: SiteLayout,
+        name: 'search',
+        hidden: true,
+        children: [{
+            path: '/search/:qu',
+            component: () => import('@/site/search/index')
+        }]
+    },
 
 
     //====================admin======================

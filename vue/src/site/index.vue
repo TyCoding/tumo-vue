@@ -73,6 +73,9 @@
         methods: {
             getList() {
                 this.listLoading = true;
+                if (isNaN(this.listQuery.pageCode)) {
+                    this.listQuery.pageCode = 1;
+                }
                 findByPageForSite(this.listQuery.pageCode, this.listQuery.pageSize).then(response => {
                     if (response.code == 20000) {
                         this.list = response.data.rows;

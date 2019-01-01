@@ -8,8 +8,8 @@
                 </h1>
                 <div class="post-data">
                     <time datetime="2017-02-25" itemprop="datePublished">发布于 {{detail.publishTime}}</time>
-                    / <a :href="'/category/' + detail.category" v-text="detail.category"></a> / <a
-                    href="#comments"><b v-text="commentCount"></b> 条评论</a> /
+                    / <a :href="'/category/' + detail.category" v-text="detail.category"></a> /
+                    <a @click="backComments"><b v-text="commentCount"></b> 条评论</a> /
                     <b v-text="detail.eyeCount"></b> 浏览
                 </div>
             </div>
@@ -70,6 +70,10 @@
                     }
                 })
             },
+            backComments() {
+                var element = document.getElementById('comments');
+                element.scrollIntoView(); //让页面滚动到指定区域
+            }
         }
     }
 </script>

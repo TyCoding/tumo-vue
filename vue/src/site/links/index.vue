@@ -63,8 +63,5 @@
 
 <style src="../../styles/site.css"></style>
 <style scoped>
-    .link-container{
-        background-color: #f7f7f7;
-    }
 
 </style>
