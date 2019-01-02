@@ -147,6 +147,7 @@
                 this.comments.cId = cId;
             },
             subComment(){
+                this.listLoading = true;
                 this.comments.articleTitle = this.article.title;
                 this.comments.articleId = this.article.id;
                 save(this.comments).then(response => {
@@ -166,6 +167,7 @@
                     this.comments.url = '';
                     this.holder = '回复';
                     this.findCommentsList();
+                    this.listLoading = false;
                 });
             }
         },

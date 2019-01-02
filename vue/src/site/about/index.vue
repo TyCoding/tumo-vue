@@ -45,7 +45,8 @@
         components: { Comments },
         data() {
             return {
-                list: null
+                list: null,
+                listLoading: false
             }
         },
         created() {
