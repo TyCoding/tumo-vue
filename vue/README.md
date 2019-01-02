@@ -12,8 +12,12 @@ npm run dev
 
 ### Compiles and minifies for production
 ```
-npm run build
+npm run build:prod
 ```
+
+演示地址：[tumo-vue.tycoding.cn](http://tumo-vue.tycoding.cn/)
+
+后台地址：[tumo-vue.tycoding.cn/login](http://tumo-vue.tycoding.cn/login)
 
 
 ![](http://cdn.tycoding.cn/tumo-vue-002.png)

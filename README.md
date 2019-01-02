@@ -15,12 +15,16 @@
 [![License](https://img.shields.io/badge/Mysql-v5.7.22-blue.svg)](https://github.com/TyCoding/tumo)
 [![License](https://img.shields.io/badge/VueAdminTemplate-v1.0-green.svg)](https://github.com/PanJiaChen/vue-admin-template)
 
+演示地址：[tumo-vue.tycoding.cn](http://tumo-vue.tycoding.cn/)
+
+后台地址：[tumo-vue.tycoding.cn/login](http://tumo-vue.tycoding.cn/login)
+
 ## 特点
 
 * 简约的设计，漂亮的界面。
 * 博客全站响应式设计。
 * 博客管理后台支持国际化。
-* 支持Markdown格式文章的撰写。
+* 支持富文本、Markdown格式文章的撰写。
 * 支持文件上传，下载。
 * 支持七牛云对象储存服务器的管理（上传、下载、重命名）
 * 支持网易云音乐插件。
