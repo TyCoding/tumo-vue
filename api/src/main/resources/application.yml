@@ -10,9 +10,10 @@ spring:
       #监控统计拦截的filters
       filter: stat
       #mysql驱动
-      driver-class-name: com.mysql.jdbc.Driver
+      driver-class-name: com.mysql.cj.jdbc.Driver
       #基本属性
-      url: jdbc:mysql://127.0.0.1:3306/tumo?useUnicode=true&characterEncoding=UTF-8
+
+      url: jdbc:mysql://127.0.0.1:3306/tumo?useUnicode=true&serverTimezone=UTC&characterEncoding=UTF-8
       username: root
       password: root
       #配置初始化大小/最小/最大
