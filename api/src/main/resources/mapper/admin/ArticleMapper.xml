@@ -27,7 +27,7 @@
     <select id="findByPageForSite" parameterType="cn.tycoding.admin.entity.Article"
             resultType="cn.tycoding.admin.entity.Article">
         SELECT * FROM tb_article WHERE 1=1
-        AND state = '1'
+
         ORDER BY id DESC
     </select>
 
