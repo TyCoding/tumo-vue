@@ -71,7 +71,6 @@
 </template>
 
 <script>
-  import Headroom from '@/utils/headroom.min.js'
   import {findAllArticle} from "@/api/article";
   import {findAllComment} from "@/api/comment";
 
@@ -133,17 +132,6 @@
           c = {text: "", prefixP: -s, skillI: 0, skillP: 0, direction: "forward", delay: a, step: g};
         i();
         r.loaded = true;
-
-        var header = new Headroom(document.getElementById("header"), {
-          tolerance: 0,
-          offset: 70,
-          classes: {
-            initial: "animated",
-            pinned: "slideDown",
-            unpinned: "slideUp"
-          }
-        });
-        header.init();
       }
 
     }

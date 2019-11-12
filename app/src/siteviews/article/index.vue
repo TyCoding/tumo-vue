@@ -120,8 +120,6 @@
 
 <script>
   import {getListForArticle, add} from "@/api/comment";
-  import Headroom from '@/utils/headroom.min.js'
-  import hljs from '@/utils/highlight.min.js'
   import {findById} from '@/api/article'
 
   export default {
@@ -203,13 +201,6 @@
       },
 
       init() {
-        //悬浮菜单
-        var floatMenu = new Headroom(document.getElementById("floatMenu"), {
-          tolerance: 0,
-          offset: 400,
-          classes: {initial: "animated", pinned: "slideDown", unpinned: "slideUp"}
-        });
-        floatMenu.init();
 
         //生成右侧目录导航
         var postDirectoryBuild = function () {
@@ -299,17 +290,6 @@
           createPostDirectory(document.getElementById('post-content'), document.getElementById('directory'), true);
         };
         postDirectoryBuild();
-        var postDirectory = new Headroom(document.getElementById("directory-content"), {
-          tolerance: 0,
-          offset: 280,
-          classes: {
-            initial: "initial",
-            pinned: "pinned",
-            unpinned: "unpinned"
-          }
-        });
-        postDirectory.init();
-        hljs.initHighlightingOnLoad();
       },
 
       floatMenu() {
