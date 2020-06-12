@@ -9,7 +9,7 @@ Tumo Blog -Vue，是 [Tumo](https://github.com/TyCoding/tumo) 项目的Vue版本
 [![License](https://img.shields.io/badge/Mysql-v5.7.22-blue.svg)](https://github.com/TyCoding/tumo)
 [![License](https://img.shields.io/badge/VueAdminTemplate-v1.0-green.svg)](https://github.com/PanJiaChen/vue-admin-template)
 
-SpringBoot + LayUI 前后端不分离版本：[Tumo](https://github.com/TyCoding/tumo)
+SpringBoot + LayUI 前后端不分离版本：[Tumo](https://github.com/TyCoding/tumo) 
 
 如果大家喜欢、或是对大家的学习有所帮助，请点击右上角star、fork 给作者一些鼓励。
 
@@ -33,6 +33,24 @@ SpringBoot + LayUI 前后端不分离版本：[Tumo](https://github.com/TyCoding
 
 - `api` - 运行`TumoApplication.java`的main方法即可
 - `app` - 使用`npm run dev`运行前端vue项目
+
+## 文档
+
+文档正在编写中...
+
+
+后续将在我的公众号 **程序员涂陌** 中陆续发布，请持续关注！
+
+| 程序员涂陌                                                  |
+| ----------------------------------------------------------- |
+| ![qrcode_for_gh](http://cdn.tycoding.cn/20200610184737.jpg) |
+
+## 捐赠
+
+| Alipay                                                     | WechatPay                                                  |
+| ---------------------------------------------------------- | ---------------------------------------------------------- |
+| ![alipay_258px](http://cdn.tycoding.cn/20200610132929.png) | ![wechat_258px](http://cdn.tycoding.cn/20200610132940.png) |
+
 
 ## 联系我
 
