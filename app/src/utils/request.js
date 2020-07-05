@@ -26,6 +26,8 @@ const service = axios.create({
 // request interceptor
 service.interceptors.request.use(
   config => {
+    console.log(process.env.VUE_APP_BASE_API)
+
     // 请求前拦截，从vuex中拿Token并设置到Header上
     if (store.getters.token) {
       config.headers['Authorization'] = getToken()

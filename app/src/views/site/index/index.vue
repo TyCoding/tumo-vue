@@ -2,8 +2,10 @@
   <div class="index-page main-content clearfix onelist-page">
     <div class="post-lists">
       <div class="post-lists-body">
-        <div v-if="list == null || list.length == 0" class="post-list-item">
-          <p>还有没有发表文章呢！</p>
+        <div v-if="list == null || list.length == 0" class="post-onelist-item">
+          <div class="post-onelist-item-container">
+            <p>还有没有发表文章呢！</p>
+          </div>
         </div>
         <div v-for="item in list" v-else :key="item.id" class="post-onelist-item">
           <div class="post-onelist-item-container">
