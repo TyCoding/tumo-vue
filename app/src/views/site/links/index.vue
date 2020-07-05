@@ -39,6 +39,4 @@ export default {
   }
 }
 </script>
-<style lang="scss" scoped>
-  @import "~@/styles/style.min.css";
-</style>
+<style src="../../../styles/style.min.css"></style>

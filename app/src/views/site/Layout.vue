@@ -65,7 +65,6 @@
 <script>
 import { getArticleList } from '@/api/article'
 import { getCommentList } from '@/api/comment'
-import NProgress from 'nprogress' // progress bar
 
 export default {
   name: 'Layout',

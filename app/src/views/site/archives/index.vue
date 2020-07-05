@@ -248,10 +248,9 @@ export default {
   }
 }
 </script>
+<style src="../../../styles/style.min.css"></style>
+<style src="../../../styles/xcode.min.css"></style>
 <style scoped>
-  @import "~@/styles/style.min.css";
-  @import "~@/styles/xcode.min.css";
-
   .content-index {
     padding: 0
   }
