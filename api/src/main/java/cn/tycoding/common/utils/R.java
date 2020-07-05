@@ -7,8 +7,10 @@ import lombok.*;
 import java.io.Serializable;
 
 /**
+ * 全局请求响应结果封装
+ *
  * @author tycoding
- * @date 2019-03-09
+ * @date 2020/6/27
  */
 @Builder
 @ToString
@@ -57,11 +59,5 @@ public class R<T> implements Serializable {
         super();
         this.code = CommonConstant.ERROR;
         this.msg = e.getMessage();
-    }
-
-    public R(String message, Throwable e) {
-        super();
-        this.msg = message;
-        this.code = CommonConstant.ERROR;
     }
 }

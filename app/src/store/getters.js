@@ -4,6 +4,7 @@ const getters = {
   token: state => state.user.token,
   avatar: state => state.user.avatar,
   name: state => state.user.name,
+  des: state => state.user.des,
   qiNiuUploadApi: state => state.api.qiNiuUploadApi,
   swaggerApi: state => state.api.swaggerApi
 }

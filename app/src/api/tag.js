@@ -1,46 +1,47 @@
 import request from '@/utils/request'
 
-export function getList(data, query) {
+export function getTagList(data, query) {
   return request({
-    url: `/api/tag/list?page=${query.page}&limit=${query.limit}`,
+    url: `/tag/list?page=${query.page}&limit=${query.limit}`,
     method: 'post',
     data
   })
 }
 
-export function getAllTag() {
+export function getTagFilterList(data) {
   return request({
-    url: `/api/tag/findAll`,
+    url: `/tag/filter/list`,
+    method: 'post',
+    data
+  })
+}
+
+export function getTagById(id) {
+  return request({
+    url: `/tag/${id}`,
     method: 'get'
   })
 }
 
-export function findById(id) {
+export function tagUpdate(data) {
   return request({
-    url: `/api/tag/${id}`,
-    method: 'get'
-  })
-}
-
-export function update(data) {
-  return request({
-    url: `/api/tag`,
+    url: `/tag`,
     method: 'put',
     data
   })
 }
 
-export function add(data) {
+export function tagAdd(data) {
   return request({
-    url: `/api/tag`,
+    url: `/tag`,
     method: 'post',
     data
   })
 }
 
-export function del(id) {
+export function tagDel(id) {
   return request({
-    url: `/api/tag/${id}`,
+    url: `/tag/${id}`,
     method: 'delete'
   })
 }

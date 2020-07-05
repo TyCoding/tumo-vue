@@ -1,6 +1,6 @@
 import router from './router'
 import store from './store'
-import {Message, MessageBox} from 'element-ui'
+import { Message, MessageBox } from 'element-ui'
 import NProgress from 'nprogress' // progress bar
 import 'nprogress/nprogress.css' // progress bar style
 import { getToken } from '@/utils/auth' // get token from cookie
@@ -8,7 +8,13 @@ import getPageTitle from '@/utils/get-page-title'
 
 NProgress.configure({ showSpinner: false }) // NProgress Configuration
 
-const whiteList = ['/login', '/', '/page/*', '/about', '/archives', '/links'] // no redirect whitelist
+/**
+ * 全局页面路由的封装
+ * 和Request的封装有一个共同点：对页面拦截。
+ * 主要实现的功能：如果Token，或者没有权限不允许访问某些页面
+ */
+
+const whiteList = ['/', '/links', '/about', '/login'] // no redirect whitelist
 
 router.beforeEach(async(to, from, next) => {
   // start progress bar
@@ -23,7 +29,7 @@ router.beforeEach(async(to, from, next) => {
   if (hasToken) {
     if (to.path === '/login') {
       // if is logged in, redirect to the home page
-      next({ path: '/' })
+      next({ path: '/tumo' })
       NProgress.done()
     } else {
       const hasGetUserInfo = store.getters.name
@@ -31,7 +37,8 @@ router.beforeEach(async(to, from, next) => {
         next()
       } else {
         try {
-          // get user info
+          // 如果有Token，但是vuex中没有用户信息，那么先获取用户信息再跳转页面
+          // 注意：/login, /user/getInfo 接口具体请求都是定义在vuex store action中，/store/modules/user.js
           await store.dispatch('user/getInfo')
 
           next()
@@ -46,7 +53,10 @@ router.beforeEach(async(to, from, next) => {
     }
   } else {
     /* has no token*/
-    if (whiteList.indexOf(to.path) !== -1 || to.path.startsWith('/page') || to.path.startsWith('/article')) {
+
+    if (whiteList.indexOf(to.path) !== -1 || to.path.startsWith('/archives')) {
+      // start progress bar
+      NProgress.start()
       // in the free login whitelist, go directly
       next()
     } else {
@@ -58,7 +68,7 @@ router.beforeEach(async(to, from, next) => {
         next(`/login?redirect=${to.path}`)
       }).catch(() => {
         next()
-      });
+      })
       NProgress.done()
     }
   }

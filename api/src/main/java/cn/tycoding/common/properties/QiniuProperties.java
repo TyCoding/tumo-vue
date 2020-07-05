@@ -3,10 +3,10 @@ package cn.tycoding.common.properties;
 import lombok.Data;
 
 /**
- * 七牛云配置
+ * 七牛云配置参数
  *
  * @author tycoding
- * @date 2019-09-19
+ * @date 2020/6/27
  */
 @Data
 public class QiniuProperties {

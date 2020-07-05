@@ -3,8 +3,10 @@ package cn.tycoding.common.utils;
 import javax.servlet.http.HttpServletRequest;
 
 /**
+ * 从Request Header中拿到IP信息
+ *
  * @author tycoding
- * @date 2019-03-26
+ * @date 2020/6/27
  */
 public class IPUtil {
 

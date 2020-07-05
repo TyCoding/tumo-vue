@@ -1,6 +1,6 @@
 package cn.tycoding.common.controller;
 
-import cn.tycoding.system.entity.SysUser;
+import cn.tycoding.biz.entity.SysUser;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationToken;
@@ -14,7 +14,7 @@ import java.util.Map;
  * Controller层公共方法提取
  *
  * @author tycoding
- * @date 2019-03-09
+ * @date 2020/6/27
  */
 public class BaseController {
 

@@ -7,8 +7,10 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.Objects;
 
 /**
+ * 获取HttpServletRequest对象
+ *
  * @author tycoding
- * @date 2019-03-26
+ * @date 2020/6/27
  */
 public class HttpContextUtil {
 

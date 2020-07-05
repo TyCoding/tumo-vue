@@ -1,46 +1,47 @@
 import request from '@/utils/request'
 
-export function getList(data, query) {
+export function getLinkList(data, query) {
   return request({
-    url: `/api/link/list?page=${query.page}&limit=${query.limit}`,
+    url: `/link/list?page=${query.page}&limit=${query.limit}`,
     method: 'post',
     data
   })
 }
 
-export function findAllLink() {
+export function getLinkFilterList(data) {
   return request({
-    url: `/api/link/findAll`,
+    url: `/link/filter/list`,
+    method: 'post',
+    data
+  })
+}
+
+export function getLinkById(id) {
+  return request({
+    url: `/link/${id}`,
     method: 'get'
   })
 }
 
-export function findById(id) {
+export function linkUpdate(data) {
   return request({
-    url: `/api/link/${id}`,
-    method: 'get'
-  })
-}
-
-export function update(data) {
-  return request({
-    url: `/api/link`,
+    url: `/link`,
     method: 'put',
     data
   })
 }
 
-export function add(data) {
+export function linkAdd(data) {
   return request({
-    url: `/api/link`,
+    url: `/link`,
     method: 'post',
     data
   })
 }
 
-export function del(id) {
+export function linkDel(id) {
   return request({
-    url: `/api/link/${id}`,
+    url: `/link/${id}`,
     method: 'delete'
   })
 }

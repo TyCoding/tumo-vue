@@ -6,8 +6,10 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
+ * @Log 注解自定义
+ *
  * @author tycoding
- * @date 2019-03-26
+ * @date 2020/6/27
  */
 @Target(ElementType.METHOD)
 @Retention(RetentionPolicy.RUNTIME)

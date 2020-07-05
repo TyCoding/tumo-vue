@@ -3,8 +3,10 @@ package cn.tycoding.common.properties;
 import lombok.Data;
 
 /**
+ * Swagger配置参数
+ *
  * @author tycoding
- * @date 2019-09-22
+ * @date 2020/6/27
  */
 @Data
 public class SwaggerProperties {

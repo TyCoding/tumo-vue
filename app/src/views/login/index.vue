@@ -1,205 +1,221 @@
 <template>
-  <div class="login-container" @click.stop="blank">
-    <el-form ref="loginForm" :model="loginForm" class="login-form" auto-complete="on"
-             label-position="left">
-      <div>
-        <img :src="bear"/>
+  <div class="login-container">
+    <el-form ref="loginForm" :model="loginForm" :rules="loginRules" class="login-form" auto-complete="on" label-position="left">
+
+      <div class="title-container">
+        <h3 class="title">Login Tumo Blog</h3>
       </div>
-      <h3 class="title">Tumo Blog</h3>
+
       <el-form-item prop="username">
-                <span class="svg-container">
-                  <svg-icon icon-class="user"/>
-                </span>
-        <el-input v-model="loginForm.username" @click.native.stop="greeting" name="username" type="text" auto-complete="on" placeholder="username"/>
-      </el-form-item>
-      <el-form-item prop="password">
-                <span class="svg-container">
-                  <svg-icon icon-class="password"/>
-                </span>
+        <span class="svg-container">
+          <svg-icon icon-class="user" />
+        </span>
         <el-input
-          @click.native.stop="blindfold"
-          :type="pwdType"
-          v-model="loginForm.password"
-          name="password"
+          ref="username"
+          v-model="loginForm.username"
+          placeholder="Username"
+          name="username"
+          type="text"
+          tabindex="1"
           auto-complete="on"
-          placeholder="password"
-          @keyup.enter.native="handleLogin"/>
+        />
+      </el-form-item>
+
+      <el-form-item prop="password">
+        <span class="svg-container">
+          <svg-icon icon-class="password" />
+        </span>
+        <el-input
+          :key="passwordType"
+          ref="password"
+          v-model="loginForm.password"
+          :type="passwordType"
+          placeholder="Password"
+          name="password"
+          tabindex="2"
+          auto-complete="on"
+          @keyup.enter.native="handleLogin"
+        />
         <span class="show-pwd" @click="showPwd">
-                    <svg-icon icon-class="eye"/>
-                </span>
+          <svg-icon :icon-class="passwordType === 'password' ? 'eye' : 'eye-open'" />
+        </span>
       </el-form-item>
-      <el-form-item>
-        <el-button :loading="loading" type="primary" style="width:100%;" @click.native.prevent="handleLogin">
-          Sign in
-        </el-button>
-      </el-form-item>
+
+      <el-button :loading="loading" type="primary" style="width:100%;margin-bottom:30px;" @click.native.prevent="handleLogin">Login</el-button>
+
+      <div class="tips">
+        <span style="margin-right:20px;">username: tycoding</span>
+        <span> password: tycoding</span>
+      </div>
+
     </el-form>
   </div>
 </template>
 
 <script>
-  export default {
-    name: 'Login',
-    data() {
-      return {
-        img: {
-          normal: 'http://cdn.tycoding.cn/normal.0447fe9.png',
-          blindfold: 'http://cdn.tycoding.cn/blindfold.58ce423.png',
-          greeting: 'http://cdn.tycoding.cn/greeting.1415c1c.png'
-        },
-        bear: 'http://cdn.tycoding.cn/normal.0447fe9.png',
-
-        loginForm: {
-          username: 'tycoding',
-          password: '123456'
-        },
-        loading: false,
-        pwdType: 'password',
-        redirect: undefined
+export default {
+  name: 'Login',
+  data() {
+    return {
+      loginForm: {
+        username: 'tycoding',
+        password: 'tycoding'
+      },
+      loginRules: {
+        username: [{ required: true, trigger: 'blur', message: '请输入用户名' }],
+        password: [{ required: true, trigger: 'blur', message: '请输入密码' }]
+      },
+      loading: false,
+      passwordType: 'password',
+      redirect: undefined
+    }
+  },
+  watch: {
+    $route: {
+      handler: function(route) {
+        this.redirect = route.query && route.query.redirect
+      },
+      immediate: true
+    }
+  },
+  methods: {
+    showPwd() {
+      if (this.passwordType === 'password') {
+        this.passwordType = ''
+      } else {
+        this.passwordType = 'password'
       }
+      this.$nextTick(() => {
+        this.$refs.password.focus()
+      })
     },
-    watch: {
-      $route: {
-        handler: function (route) {
-          this.redirect = route.query && route.query.redirect
-        },
-        immediate: true
-      }
-    },
-    methods: {
-      blank() {
-        this.bear = this.img.normal;
-      },
-      blindfold() {
-        this.bear = this.img.blindfold;
-      },
-      greeting() {
-        this.bear = this.img.greeting;
-      },
-
-      showPwd() {
-        if (this.pwdType === 'password') {
-          this.pwdType = ''
+    handleLogin() {
+      this.$refs.loginForm.validate(valid => {
+        if (valid) {
+          this.loading = true
+          this.$store.dispatch('user/login', this.loginForm).then(() => {
+            this.$router.push({ path: this.redirect || 'tumo' })
+            this.loading = false
+          }).catch(() => {
+            this.loading = false
+          })
         } else {
-          this.pwdType = 'password'
+          console.log('error submit!!')
+          return false
         }
-      },
-      handleLogin() {
-        this.$refs.loginForm.validate(valid => {
-          if (valid) {
-            this.loading = true
-            this.$store.dispatch('user/login', this.loginForm).then(() => {
-              this.loading = false
-              this.$router.push({path: '/admin/dashboard'})
-            }).catch(() => {
-              this.loading = false
-            })
-          } else {
-            console.log('error submit!!')
-            return false
-          }
-        })
-      }
+      })
     }
   }
+}
 </script>
 
-<style rel="stylesheet/scss" lang="scss">
-  $bg: #2d3a4b;
-  $light_gray: #eee;
+<style lang="scss">
+/* 修复input 背景不协调 和光标变色 */
+/* Detail see https://github.com/PanJiaChen/vue-element-admin/pull/927 */
 
-  /* reset element-ui css */
-  .login-container {
-    .el-input {
-      display: inline-block;
+$bg:#283443;
+$light_gray:#fff;
+$cursor: #fff;
+
+@supports (-webkit-mask: none) and (not (cater-color: $cursor)) {
+  .login-container .el-input input {
+    color: $cursor;
+  }
+}
+
+/* reset element-ui css */
+.login-container {
+  .el-input {
+    display: inline-block;
+    height: 47px;
+    width: 85%;
+
+    input {
+      background: transparent;
+      border: 0px;
+      -webkit-appearance: none;
+      border-radius: 0px;
+      padding: 12px 5px 12px 15px;
+      color: $light_gray;
       height: 47px;
-      width: 85%;
-      input {
-        background: transparent;
-        border: 0px;
-        -webkit-appearance: none;
-        border-radius: 0px;
-        padding: 12px 5px 12px 15px;
-        height: 47px;
-        &:-webkit-autofill {
-          -webkit-box-shadow: 0 0 0px 1000px $bg inset !important;
-          -webkit-text-fill-color: #fff !important;
-        }
-      }
-    }
-    .el-form-item {
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      border-radius: 5px;
-      color: #454545;
-      .el-form-item__content {
-        border-bottom: 1px solid #dcdfe6;
+      caret-color: $cursor;
+
+      &:-webkit-autofill {
+        box-shadow: 0 0 0px 1000px $bg inset !important;
+        -webkit-text-fill-color: $cursor !important;
       }
     }
   }
 
+  .el-form-item {
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    color: #454545;
+  }
+}
 </style>
 
-<style rel="stylesheet/scss" lang="scss" scoped>
-  $bg: #2d3a4b;
-  $dark_gray: #889aa4;
-  $light_gray: #eee;
-  .login-container {
-    position: fixed;
-    height: 100%;
-    width: 100%;
-    background-color: #b8e5f8;
-    background-image: url("http://cdn.tycoding.cn/db29b0fbd2f78dd8c1b7.db29b0f.png");
-    .login-form {
-      position: absolute;
-      left: 0;
-      right: 0;
-      width: 432px;
-      max-width: 100%;
-      padding: 35px 35px 15px 35px;
-      margin: 120px auto;
-      background-color: #fff;
+<style lang="scss" scoped>
+$bg:#2d3a4b;
+$dark_gray:#889aa4;
+$light_gray:#eee;
 
-      div>img{
-        position: absolute;
-        top: 0;
-        left: 50%;
-        width: 10rem;
-        -webkit-transform: translate(-50%, -83%);
-        transform: translate(-50%, -83%);
-        z-index: 1;
+.login-container {
+  min-height: 100%;
+  width: 100%;
+  background-color: $bg;
+  overflow: hidden;
+
+  .login-form {
+    position: relative;
+    width: 520px;
+    max-width: 100%;
+    padding: 160px 35px 0;
+    margin: 0 auto;
+    overflow: hidden;
+  }
+
+  .tips {
+    font-size: 14px;
+    color: #fff;
+    margin-bottom: 10px;
+
+    span {
+      &:first-of-type {
+        margin-right: 16px;
       }
     }
-    .tips {
-      font-size: 14px;
-      margin-bottom: 10px;
-      span {
-        &:first-of-type {
-          margin-right: 16px;
-        }
-      }
-    }
-    .svg-container {
-      padding: 6px 5px 6px 15px;
-      vertical-align: middle;
-      width: 30px;
-      display: inline-block;
-    }
+  }
+
+  .svg-container {
+    padding: 6px 5px 6px 15px;
+    color: $dark_gray;
+    vertical-align: middle;
+    width: 30px;
+    display: inline-block;
+  }
+
+  .title-container {
+    position: relative;
+
     .title {
       font-size: 26px;
-      font-weight: 400;
-      color: #0084ff;
+      color: $light_gray;
       margin: 0px auto 40px auto;
       text-align: center;
       font-weight: bold;
     }
-    .show-pwd {
-      position: absolute;
-      right: 10px;
-      top: 7px;
-      font-size: 16px;
-      color: $dark_gray;
-      cursor: pointer;
-      user-select: none;
-    }
   }
+
+  .show-pwd {
+    position: absolute;
+    right: 10px;
+    top: 7px;
+    font-size: 16px;
+    color: $dark_gray;
+    cursor: pointer;
+    user-select: none;
+  }
+}
 </style>

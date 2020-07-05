@@ -11,21 +11,22 @@
           <i class="el-icon-caret-bottom" />
         </div>
         <el-dropdown-menu slot="dropdown" class="user-dropdown">
-          <router-link to="/">
+          <router-link to="/tumo">
             <el-dropdown-item>
               Home
             </el-dropdown-item>
           </router-link>
-          <router-link to="/profile/index">
-            <el-dropdown-item>
-              个人中心
-            </el-dropdown-item>
-          </router-link>
           <a target="_blank" href="https://github.com/TyCoding/tumo-vue/">
-            <el-dropdown-item>项目源码</el-dropdown-item>
+            <el-dropdown-item>Github</el-dropdown-item>
           </a>
-          <el-dropdown-item divided>
-            <span style="display:block;" @click="logout">Log Out</span>
+          <a target="_blank" href="http://docs.tumo.tycoding.cn/">
+            <el-dropdown-item>Docs</el-dropdown-item>
+          </a>
+          <router-link to="/tumo/profile">
+            <el-dropdown-item divided >Profile</el-dropdown-item>
+          </router-link>
+          <el-dropdown-item divided @click.native="logout">
+            <span style="display:block;">Log Out</span>
           </el-dropdown-item>
         </el-dropdown-menu>
       </el-dropdown>

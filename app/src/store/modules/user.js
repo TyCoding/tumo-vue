@@ -1,15 +1,21 @@
-import { login, logout, getInfo } from '@/api/login'
+import { login, logout, getInfo } from '@/api/user'
 import { getToken, setToken, removeToken } from '@/utils/auth'
 import { resetRouter } from '@/router'
-import store from "../index";
 
-const state = {
-  token: getToken(),
-  name: '',
-  avatar: ''
+const getDefaultState = () => {
+  return {
+    token: getToken(),
+    name: '',
+    avatar: ''
+  }
 }
 
+const state = getDefaultState()
+
 const mutations = {
+  RESET_STATE: (state) => {
+    Object.assign(state, getDefaultState())
+  },
   SET_TOKEN: (state, token) => {
     state.token = token
   },
@@ -18,6 +24,9 @@ const mutations = {
   },
   SET_AVATAR: (state, avatar) => {
     state.avatar = avatar
+  },
+  SET_DES: (state, des) => {
+    state.des = des
   }
 }
 
@@ -37,16 +46,23 @@ const actions = {
     })
   },
 
-  // get user info
+  /**
+   * 获取用户信息。此请求将在 /login 请求后立即调用
+   */
   getInfo({ commit, state }) {
     return new Promise((resolve, reject) => {
       getInfo().then(response => {
-        let data = response.data
+        const { data } = response
+
         if (!data) {
-          reject('Verification failed, please Login again.')
+          return reject('Verification failed, please Login again.')
         }
-        commit('SET_NAME', data.username)
-        commit('SET_AVATAR', data.avatar)
+
+        const { username, avatar, des } = data
+
+        commit('SET_NAME', username)
+        commit('SET_AVATAR', avatar)
+        commit('SET_DES', des)
         resolve(data)
       }).catch(error => {
         reject(error)
@@ -58,9 +74,9 @@ const actions = {
   logout({ commit, state }) {
     return new Promise((resolve, reject) => {
       logout(state.token).then(() => {
-        commit('SET_TOKEN', '')
-        removeToken()
+        removeToken() // must remove  token  first
         resetRouter()
+        commit('RESET_STATE')
         resolve()
       }).catch(error => {
         reject(error)
@@ -71,8 +87,8 @@ const actions = {
   // remove token
   resetToken({ commit }) {
     return new Promise(resolve => {
-      commit('SET_TOKEN', '')
-      removeToken()
+      removeToken() // must remove  token  first
+      commit('RESET_STATE')
       resolve()
     })
   }

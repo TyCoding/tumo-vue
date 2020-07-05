@@ -1,16 +1,16 @@
 import request from '@/utils/request'
 
-export function getList(data, query) {
+export function getLoginLogList(data, query) {
   return request({
-    url: `/api/loginlog/list?page=${query.page}&limit=${query.limit}`,
+    url: `/loginlog/list?page=${query.page}&limit=${query.limit}`,
     method: 'post',
     data
   })
 }
 
-export function del(id) {
+export function loginLogDel(id) {
   return request({
-    url: `/api/loginlog/${id}`,
+    url: `/loginlog/${id}`,
     method: 'delete'
   })
 }

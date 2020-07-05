@@ -2,59 +2,52 @@ import request from '@/utils/request'
 
 export function getArticleList(data, query) {
   return request({
-    url: `/api/article/list?page=${query.page}&limit=${query.limit}`,
+    url: `/article/list?page=${query.page}&limit=${query.limit}`,
     method: 'post',
     data
   })
 }
 
-export function findAllArticle() {
+export function findByCategory(id) {
   return request({
-    url: `/api/article/findAll`,
+    url: `/article/findByCategory/${id}`,
     method: 'get'
   })
 }
 
-export function findArchives() {
+export function findByTag(id) {
   return request({
-    url: `/api/article/archives`,
+    url: `/article/findByTag/${id}`,
     method: 'get'
   })
 }
 
-export function getArticleListForSite(current) {
+export function getArticleById(id) {
   return request({
-    url: `/api/article/listForSite/page/${current}`,
+    url: `/article/${id}`,
     method: 'get'
   })
 }
 
-export function findById(id) {
+export function articleUpdate(data) {
   return request({
-    url: `/api/article/${id}`,
-    method: 'get'
-  })
-}
-
-export function update(data) {
-  return request({
-    url: `/api/article`,
+    url: `/article`,
     method: 'put',
     data
   })
 }
 
-export function add(data) {
+export function articleAdd(data) {
   return request({
-    url: `/api/article`,
+    url: `/article`,
     method: 'post',
     data
   })
 }
 
-export function del(id) {
+export function articleDel(id) {
   return request({
-    url: `/api/article/${id}`,
+    url: `/article/${id}`,
     method: 'delete'
   })
 }

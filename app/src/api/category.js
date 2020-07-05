@@ -1,46 +1,47 @@
 import request from '@/utils/request'
 
-export function getList(data, query) {
+export function getCategoryList(data, query) {
   return request({
-    url: `/api/category/list?page=${query.page}&limit=${query.limit}`,
+    url: `/category/list?page=${query.page}&limit=${query.limit}`,
     method: 'post',
     data
   })
 }
 
-export function getAllCategory() {
+export function getCategoryFilterList(data) {
   return request({
-    url: `/api/category/findAll`,
+    url: `/category/filter/list`,
+    method: 'post',
+    data
+  })
+}
+
+export function getCategoryById(id) {
+  return request({
+    url: `/category/${id}`,
     method: 'get'
   })
 }
 
-export function findById(id) {
+export function categoryUpdate(data) {
   return request({
-    url: `/api/category/${id}`,
-    method: 'get'
-  })
-}
-
-export function update(data) {
-  return request({
-    url: `/api/category`,
+    url: `/category`,
     method: 'put',
     data
   })
 }
 
-export function add(data) {
+export function categoryAdd(data) {
   return request({
-    url: `/api/category`,
+    url: `/category`,
     method: 'post',
     data
   })
 }
 
-export function del(id) {
+export function categoryDel(id) {
   return request({
-    url: `/api/category/${id}`,
+    url: `/category/${id}`,
     method: 'delete'
   })
 }

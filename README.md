@@ -1,86 +1,94 @@
-# Tumo Blog 
+# Tumo Blog
 
-![](http://cdn.tycoding.cn/tumo.png)
+> Tumo Blog 是一个简洁美观的博客系统，基于SpringBoot2.X + Vue.js。
 
-Tumo Blog -Vue，是 [Tumo](https://github.com/TyCoding/tumo) 项目的Vue版本，采用了SpringBoot2.1.3 + Vue前后端分离式开发。项目集成了Shiro、Swagger等框架，对于初学Vue前后端分离项目的朋友来说，这是个不错的例子。
+![License](https://img.shields.io/badge/License-MIT-green)  [![GitHub stars](https://img.shields.io/github/stars/TyCoding/tumo?label=Stars)](https://github.com/TyCoding/tumo/stargazers)  ![SpringBoot](https://img.shields.io/badge/SpringBoot-2.3.1.RELEASE-orange)
 
-[![License](https://img.shields.io/badge/SpringBoot-v2.0.5.RELEASE-green.svg)](https://github.com/TyCoding/tumo)
-[![License](https://img.shields.io/badge/Vue.js-v2.x-blue.svg)](https://github.com/TyCoding/tumo)
-[![License](https://img.shields.io/badge/Mysql-v5.7.22-blue.svg)](https://github.com/TyCoding/tumo)
-[![License](https://img.shields.io/badge/VueAdminTemplate-v1.0-green.svg)](https://github.com/PanJiaChen/vue-admin-template)
+[Tumo](https://github.com/TyCoding/tumo) 是一款基于SpringBoot2.x构建的博客系统。[Tumo](https://github.com/TyCoding/tumo) 系统具有简洁、规范的代码设计，借助Vue.js、Thymeleaf构建传统单体架构项目；与此同时，[Tumo-Vue](https://github.com/TyCoding/tumo-vue) 前后端分离架构的系统也应运而生。两款项目采用相同的后端逻辑实现，区别在于前者采用了单体架构，而后者使用Vue2.x实现前后端分离架构。两者的结合更好的帮助开发者熟悉SpringBoot框架快速开发并学习项目如何从单体架构过度到前后端分离架构。
 
-SpringBoot + LayUI 前后端不分离版本：[Tumo](https://github.com/TyCoding/tumo) 
+- 在线预览：[http://tumo.tycoding.cn/](http://tumo.tycoding.cn/)
+- 后台地址：[http://tumo.tycoding.cn/login](http://tumo.tycoding.cn/login)
+- 开发文档：[http://docs.tumo.tycoding.cn/#/](http://docs.tumo.tycoding.cn/#/)
 
-如果大家喜欢、或是对大家的学习有所帮助，请点击右上角star、fork 给作者一些鼓励。
+## 单体版本
 
-## 写在前面
+本前后端分离版本和单体版本采用了相同的后端逻辑实现，是你**从单体架构过度到前后端分离架构**的最佳实践。
 
-学习了此项目，能带给你：
+项目源码：[https://github.com/TyCoding/tumo](https://github.com/TyCoding/tumo) 希望大家star、fork支持。
 
-1. 了解在基于Vue的前后端分离项目中如果完成CRUD和数据交互
-2. 学习在基于Vue的前后端分离项目中如何使用Shiro进行权限控制
-3. 清楚一个前后端分离博客项目的开发流程和设计思路
-4. 总而言之，这是一个不错的前后端分离项目示例，通俗易懂的代码设计和业务流程，带给你更愉快的开发体验。
+## 技术选型
 
-## 运行
-
-此仓库实际包含两个项目：
-
-- `api` - 博客Java后端接口（SpringBoot）
-- `app` - 博客前前端页面（Vue）
-
-请分别运行这两个项目：
-
-- `api` - 运行`TumoApplication.java`的main方法即可
-- `app` - 使用`npm run dev`运行前端vue项目
+| Name | Version | Env | Version |
+| -- | -- | -- | -- |
+| SpringBoot | 2.3.1.RELEASE | JDK | 1.8 |
+| Mybatis | 2.1.3 | MySQL | 5.7 |
+| Spring-Shiro | 1.5.2 | IDEA | 2020.1 |
 
 ## 文档
 
-文档正在编写中...
+> 如果有需要提供该项目技术支持的小伙伴加QQ：2783903379 进该项目的交流群（不免费，门槛：10元）。
+
+手摸手教你SpringBoot项目实战。
+
+项目开发、使用文档请移步：[http://docs.tumo.tycoding.cn](http://docs.tumo.tycoding.cn) 
 
 
-后续将在我的公众号 **程序员涂陌** 中陆续发布，请持续关注！
+文档将在我的公众号 **程序员涂陌** 第一时间发布，请持续关注！
 
 | 程序员涂陌                                                  |
 | ----------------------------------------------------------- |
 | ![qrcode_for_gh](http://cdn.tycoding.cn/20200610184737.jpg) |
 
-## 捐赠
+## 请喝果汁
 
 | Alipay                                                     | WechatPay                                                  |
 | ---------------------------------------------------------- | ---------------------------------------------------------- |
 | ![alipay_258px](http://cdn.tycoding.cn/20200610132929.png) | ![wechat_258px](http://cdn.tycoding.cn/20200610132940.png) |
 
+## 预览
+
+![截屏2020-07-05 上午11.20.41](http://cdn.tycoding.cn/20200705112055.png)
+
+![截屏2020-07-05 上午11.21.15](http://cdn.tycoding.cn/20200705112118.png)
+
+![截屏2020-07-05 上午11.21.57](http://cdn.tycoding.cn/20200705112200.png)
+
+![截屏2020-07-05 上午11.23.06](http://cdn.tycoding.cn/20200705112309.png)
+
+![截屏2020-07-05 上午11.23.27](http://cdn.tycoding.cn/20200705112330.png)
+
+![截屏2020-07-05 上午11.23.43](http://cdn.tycoding.cn/20200705112405.png)
+
+![截屏2020-07-05 上午11.24.45](http://cdn.tycoding.cn/20200705112448.png)
+
+![截屏2020-07-05 上午11.25.00](http://cdn.tycoding.cn/20200705112503.png)
+
+![截屏2020-07-05 上午11.25.27](http://cdn.tycoding.cn/20200705112533.png)
+
+![截屏2020-07-05 上午11.25.44](http://cdn.tycoding.cn/20200705112547.png)
+
+![截屏2020-07-05 上午11.26.00](http://cdn.tycoding.cn/20200705112602.png)
+
+![截屏2020-07-05 上午11.27.55](http://cdn.tycoding.cn/20200705112758.png)
+
+![截屏2020-07-05 上午11.26.21](http://cdn.tycoding.cn/20200705112636.png)
+
+![截屏2020-07-05 上午11.28.42](http://cdn.tycoding.cn/20200705112844.png)
+
+![截屏2020-07-05 上午11.26.54](http://cdn.tycoding.cn/20200705112711.png)
+
+![截屏2020-07-05 上午11.29.00](http://cdn.tycoding.cn/20200705112903.png)
+
+
+## 交流
+
+QQGroup：671017003   
+
+WeChatGroup:  关注公众号查看
 
 ## 联系我
 
 - [Blog@TyCoding's blog](http://www.tycoding.cn)
 
 - [GitHub@TyCoding](https://github.com/TyCoding)
-
-- [ZhiHu@TyCoding](https://www.zhihu.com/people/tomo-83-82/activities)
-
-- QQ Group: 671017003
-
-## 项目预览
-
-![](doc/20190928104847.png)
-
-![](doc/20190928104904.png)
-
-![](doc/20190928104931.png)
-
-![](doc/20190928104940.png)
-
-![](doc/20190928105056.png)
-
-![](doc/20190928105115.png)
-
-![](doc/20190928105141.png)
-
-![](doc/20190928105158.png)
-
-![](doc/20190928105205.png)
-
-![](doc/20190928105213.png)
 

@@ -6,10 +6,10 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.PropertySource;
 
 /**
- * 配置文件
+ * 系统配置类定义
  *
  * @author tycoding
- * @date 2019-09-19
+ * @date 2020/6/27
  */
 @Data
 @SpringBootConfiguration

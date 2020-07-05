@@ -7,8 +7,10 @@ import lombok.NoArgsConstructor;
 import java.io.Serializable;
 
 /**
+ * 分页参数定义
+ *
  * @author tycoding
- * @date 2019-03-09
+ * @date 2020/6/27
  */
 @Data
 @NoArgsConstructor
