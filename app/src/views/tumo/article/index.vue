@@ -40,7 +40,7 @@
 </template>
 
 <script>
-import { getArticleList, getArticleById, articleAdd, articleUpdate, articleDel } from '@/api/article'
+import { getArticleList, getArticleById, articleDel } from '@/api/article'
 import Pagination from '@/components/Pagination'
 
 export default {

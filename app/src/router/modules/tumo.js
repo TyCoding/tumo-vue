@@ -3,6 +3,7 @@
  */
 
 import Layout from '@/layout'
+const API_BASE = process.env.VUE_APP_API_BASE
 
 const tumoRouter = [
   {
@@ -122,8 +123,7 @@ const tumoRouter = [
         meta: { title: '七牛云', icon: '' }
       },
       {
-        path: 'swagger',
-        component: () => import('@/views/tumo/setting/swagger/index'),
+        path: API_BASE + '/swagger-ui.html',
         name: 'tumoSettingSwagger',
         meta: { title: 'Swagger', icon: '' }
       }
