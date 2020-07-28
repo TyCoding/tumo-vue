@@ -36,6 +36,7 @@ module.exports = {
       warnings: false,
       errors: true
     },
+    // 前端解决跨域，后端不再解决
     proxy: {
       // change xxx-api/login => mock/login
       // detail: https://cli.vuejs.org/config/#devserver-proxy
