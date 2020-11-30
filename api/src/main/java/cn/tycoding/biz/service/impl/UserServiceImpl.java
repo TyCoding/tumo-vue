@@ -66,7 +66,9 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, SysUser> implements
     @Override
     @Transactional
     public void updatePass(SysUser sysUser) {
-        SysUser user = new SysUser().setPassword(sysUser.getPassword());
+        SysUser user = new SysUser()
+                .setId(sysUser.getId())
+                .setPassword(md5Util.encryptPassword(sysUser.getPassword()));
         userMapper.updateById(user);
     }
 

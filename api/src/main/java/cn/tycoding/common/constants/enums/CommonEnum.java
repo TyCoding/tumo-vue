@@ -22,7 +22,9 @@ public enum CommonEnum {
     COMMON_ERROR(500, "系统内部错误"),
     FILE_ERROR(400, "上传的文件为空"),
     COMMON_SUCCESS(200, "成功"),
-    RESET_SUCCESS(200, "重置密码成功");
+    RESET_SUCCESS(200, "重置密码成功"),
+    UPLOAD_FAIL(400, "文件上传失败")
+    ;
 
     private final int code;
     private final String msg;

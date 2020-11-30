@@ -9,7 +9,7 @@
             </el-form-item>
             <el-form-item style="padding: 0;margin: 0">
               <el-button type="success" icon="el-icon-search" @click="fetchData" />
-              <el-button type="primary" icon="el-icon-plus" @click="handleAdd" />
+              <el-button type="primary" icon="el-icon-plus" @click="$refs.model.fetchData()" />
             </el-form-item>
           </el-form>
           <el-tree
@@ -22,7 +22,7 @@
             <span slot-scope="{ node, data }" class="custom-tree-node">
               <span>{{ data.name }}</span>
               <span>
-                <el-button type="text" size="mini" icon="el-icon-edit" @click="() => handleEdit(node, data)" />
+                <el-button type="text" size="mini" icon="el-icon-edit" @click="() => $refs.model.fetchData(data.id)" />
                 <el-button type="text" size="mini" icon="el-icon-delete" @click="() => handleDel(node, data)" />
               </span>
             </span>
@@ -45,12 +45,12 @@
         </el-card>
       </el-col>
     </el-row>
-    <model :form="form" :dialog-visible="dialogVisible" @modelOpen="handleSubmit" />
+    <model ref="model" @refresh="fetchData" />
   </div>
 </template>
 
 <script>
-import { getCategoryFilterList, getCategoryById, categoryUpdate, categoryAdd, categoryDel } from '@/api/category'
+import { getCategoryFilterList, categoryDel } from '@/api/category'
 import { findByCategory } from '@/api/article'
 import Model from './components/model'
 export default {
@@ -59,20 +59,14 @@ export default {
   data() {
     return {
       list: [],
-      form: {},
       query: {},
-      articleList: [],
-      dialogVisible: false
+      articleList: []
     }
   },
   created() {
     this.fetchData()
   },
   methods: {
-    handleClose() {
-      this.dialogVisible = false
-      this.form = {}
-    },
     fetchData() {
       getCategoryFilterList(this.query).then(res => {
         if (res.code === 200) {
@@ -82,43 +76,6 @@ export default {
         }
       })
     },
-    handleEdit(node, data) {
-      getCategoryById(data.id).then(res => {
-        if (res.code === 200) {
-          this.form = res.data
-          this.dialogVisible = true
-        } else {
-          this.$message.error(res.msg)
-        }
-      })
-    },
-    handleAdd() {
-      this.dialogVisible = true
-    },
-    handleSubmit(formName) {
-      if (this.form.id === undefined) {
-        categoryAdd(this.form).then(res => {
-          if (res.code === 200) {
-            this.$message.success('添加成功')
-            this.fetchData()
-            this.handleClose()
-          } else {
-            this.$message.error(res.msg)
-          }
-        })
-      } else {
-        categoryUpdate(this.form).then(res => {
-          if (res.code === 200) {
-            this.$message.success('修改成功')
-            this.fetchData()
-            this.handleClose()
-          } else {
-            this.$message.error(res.msg)
-          }
-        })
-      }
-    },
-
     handleNodeChange(data, node) {
       findByCategory(data.id).then(res => {
         this.articleList = res.data
@@ -148,5 +105,5 @@ export default {
 </script>
 
 <style scoped>
-  .custom-tree-node{flex:1;display:flex;align-items:center;justify-content:space-between;font-size:14px;padding-right:8px}.el-tree{margin-left:-24px}
+.custom-tree-node{flex:1;display:flex;align-items:center;justify-content:space-between;font-size:14px;padding-right:8px}.el-tree{margin-left:-24px}
 </style>

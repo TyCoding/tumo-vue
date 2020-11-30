@@ -76,6 +76,7 @@ const actions = {
       logout(state.token).then(() => {
         removeToken() // must remove  token  first
         resetRouter()
+        commit('SET_TOKEN', '')
         commit('RESET_STATE')
         resolve()
       }).catch(error => {
@@ -89,6 +90,7 @@ const actions = {
     return new Promise(resolve => {
       removeToken() // must remove  token  first
       commit('RESET_STATE')
+      commit('SET_TOKEN', '')
       resolve()
     })
   }

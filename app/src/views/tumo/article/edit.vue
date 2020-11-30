@@ -106,7 +106,7 @@ export default {
             if (res.code === 200) {
               this.$message.success('文章更新成功，即将跳转到文章列表页面')
               setTimeout(function() {
-                this.$router.push({ name: 'tumoArticleList' })
+                window.location.href = '/tumo/article'
               }, 400)
             } else {
               this.$message.error(res.msg)
